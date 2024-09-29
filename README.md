@@ -1,4 +1,4 @@
-# USCS22 Final Project
+# USCS22 Campus Bulletin
 
 ## Team Members
 - [Khilfi](https://github.com/KhilfiKhairulAmin)
@@ -7,3 +7,4 @@
 - [Rusydina]()
 
 ## Project Description
+This project is a C++ terminal-based bulletin platform featuring the latest news from all around the campus! Fomo no more..!
