@@ -6,3 +6,7 @@ build/*
 
 # ignore executable files
 *.exe
+
+.vscode
+
+desktop.ini
