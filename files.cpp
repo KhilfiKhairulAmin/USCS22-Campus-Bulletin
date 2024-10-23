@@ -1,3 +1,16 @@
+/* ------------------------------------------------------------- AUTHOR ---------------------------------------------------------------- */
+// CREATED BY: Khilfi bin Khairul Amin
+/* ---------------------------------------------------------- DESCRIPTION -------------------------------------------------------------- */
+//
+// This file is created by Khilfi to demonstrate file operation to read and write data about Publisher.
+//
+// The file `Publisher.h` and `publishers.txt` is related to this file.
+//   - Publisher.h: store declaration of Publisher class
+//   - publishers.txt: store data about Publisher in text format
+//
+// Created at 23.10.2024
+//
+/* -------------------------------------------------------- CLASS DEFINITION ----------------------------------------------------------- */
 #include <iostream>
 #include <fstream>
 #include "Publisher.h"
@@ -72,6 +85,8 @@ void Publisher::displayInfo()
   cout << "Time Registered: " << timeRegistered << endl;
 }
 
+/* -------------------------------------------------------- FUNCTION DEFINITION ----------------------------------------------------------- */
+
 // This function is cursed with complexity, read at your own sanity!
 void readPublishers(Publisher* publishers)
 {
@@ -139,6 +154,8 @@ void writePublishers(Publisher* publishers)
   }
 }
 
+/* -------------------------------------------------------- MAIN FUNCTION ----------------------------------------------------------- */
+
 int main()
 {
   readPublishers(publishers);
@@ -148,3 +165,5 @@ int main()
   publishers[1] = Publisher("myvo@gmail.com", "myvo123", "MyVolunteer");
   writePublishers(publishers);
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
