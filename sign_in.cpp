@@ -1,8 +1,11 @@
 /* ------------------------------------------------------------- AUTHOR ---------------------------------------------------------------- */
 // CREATED BY: Khilfi bin Khairul Amin
-/* ------------------------------------------------------------- TODOS ---------------------------------------------------------------- */
-// TODO: Create a database API
-// TODO: Create a date struct
+/* ---------------------------------------------------------- DESCRIPTION -------------------------------------------------------------- */
+//
+// This file is created by Khilfi to simulate the sign up and login feature.
+// This file does not relate to main.cpp and other files, can run this file independently and it will work.
+// Created at 22.10.2024
+//
 /* -------------------------------------------------------- CLASS DECLARATION --------------------------------------------------------- */
 #include <iostream>
 #include <string>
