@@ -8,12 +8,13 @@ using namespace std;
 class Publisher
 {
   private:
-    int id;
-    string email;
-    string password;
+    int id;  // Unique identifier for the publisher
+    string email;  // Will be used for sign up and log in
+    string password;  // Used for authentication
     string name;  // Publicly shown name
-    time_t timeRegistered;
-    static int nextId;
+    time_t timeRegistered;  // Stored in time after epoch format (seconds)
+    
+    static int nextId;  // 
   public:
     Publisher(int, string, string, string, time_t);  // This one is default to load Publisher from file
     Publisher(string, string, string);  // This one is used when creating new Publisher
