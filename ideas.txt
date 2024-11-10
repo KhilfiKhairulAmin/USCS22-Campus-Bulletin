@@ -1,0 +1,5 @@
+During presentation, we want to capture the audiences attention!
+
+To do this, we need to set a theme, a theme that represents why our app is in terminal interface instead of the modern GUI interface.
+Example, our app revolves around the situation of Fallout 
+
