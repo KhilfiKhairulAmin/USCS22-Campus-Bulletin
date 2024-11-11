@@ -49,10 +49,15 @@ class Publisher
             cout << "Name: " << name << endl;
             cout << "Username: " << username << endl;
         }
+        int getId()
+        {
+            return id;
+        }
 };
 
 int Publisher::totalPublishers = 0;  // Default value for totalPublisher is 0
 int Publisher::curId = 1;  // Starting value for current ID is 1
+int sessionId = 0;
 
 /* -------------------------------------------------------- MAIN PROGRAM -------------------------------------------------------------- */
 Publisher publisher1("MyVolunteer", "myvo", "myvo123");
@@ -101,7 +106,7 @@ int main()
             if (currentPublisher->comparePassword(password))
             {
                 cout << "User logged in successfully! User INFO is:" << endl;
-                currentPublisher->displayInfo();
+                sessionId = currentPublisher->getId();
             }
             else
             {
@@ -131,13 +136,14 @@ int main()
         publishers[2] = newPublisher;
         cout << endl << "New user created successfully!" << endl;
         cout << endl << "New Publisher Info" << endl;
-        publishers[2].displayInfo();
+        sessionId = publishers[2].getId();
     }
     else
     {
         // Invalid option
         cout << "Invalid action." << endl;
     }
+    publishers[sessionId-1].displayInfo();
     cout << endl << "Exiting application..." << endl;
 
     return 0;
