@@ -34,6 +34,7 @@ class Publisher
         }
         Publisher()
         {
+            
         }
         string getUsername()
         {
