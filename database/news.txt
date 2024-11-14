@@ -1,6 +1,1 @@
-<<<<<<< HEAD
 id█pubid█title█content
-=======
-id█publisherId█datetime█title█content█tags█numOfLikes█numOfDislikes
-1█1█23904324█MyVo Clean the Beach█Beach got cleaned.█environment,volunteer█10█1
->>>>>>> project_revolution
