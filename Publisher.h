@@ -27,14 +27,16 @@ class PublisherManager
   public:
     /** Returns a constant vector containing all `Publishers`. */
     const vector<Publisher>& getPublishers() const;
-    /** Returns one `Publisher` based on given `id`. */
-    const Publisher& getOnePublisher(int id) const;
     /** Creates a new `Publisher`, then returns its constant pointer.  */
     const Publisher& createPublisher(string email, string password, string name, string phone, string about) const;
     /** Modifies data inside a `Publisher`, then return its constant pointer. */
     const Publisher& editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newPhone = "", string about = "") const;
     /** Deletes a `Publisher`. */
     void deletePublisher(int id) const;
+    /** Returns one `Publisher` based on given `id`. */
+    const Publisher& searchId(int id) const;
+    /** Returns one `Publisher` based on given `email`. */
+    const Publisher& searchEmail(string email) const;
     /** Lazily searches names of `Publishers`, then return a constant vector. */
     const vector<Publisher>& searchName(string name);
     /** Lazily searches phone numbers of `Publishers`, then return a constant vector. */

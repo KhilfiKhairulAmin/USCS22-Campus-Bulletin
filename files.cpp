@@ -16,11 +16,10 @@
 #include "Publisher.h"
 using namespace std;
 
-// TODO: Siapkan read/write file
-// TODO: Siapkan standard API class for them to work with the data
-// TODO: Demonstrate WASD-Arrow Interactive Interface dekat groupmates
-// TODO: Siapkan simple login and signup + session management
-// TODO: What's next?! -> Topik Meeting: UI Flow in Determining Next Feature
+// TODO Siapkan read/write files
+// TODO Siapkan class interface untuk both entities
+// TODO Siapkan definition of object dalam different file for ease of work
+// TODO Siapkan entities manager
 
 const int P_SIZE = 200;
 Publisher publishers[P_SIZE];
