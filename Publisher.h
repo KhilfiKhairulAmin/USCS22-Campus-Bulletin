@@ -19,33 +19,43 @@ class PublisherManager
 {
   protected:
     /** Vector containing `Publishers`. */
-    vector<Publisher> publishers;
+    vector<Publisher>* publishers;
+
     /** Keeps total number of publishers */
     static int totalPublishers;
+
     /** Tracks next unique value for `Publisher.id` */
     static int nextId;
+
   public:
     /** Loads `Publishers` from database. */
     PublisherManager();
-    /** Returns a vector containing all `Publishers`. */
-    vector<Publisher> getPublishers();
-    /** Creates a new `Publisher`, then returns its constant pointer.  */
-    Publisher createPublisher(string email, string password, string name, string phone, string about);
-    /** Modifies data inside a `Publisher`, then return its constant pointer. */
-    Publisher editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newPhone = "", string about = "");
-    /** Deletes a `Publisher`. */
-    void deletePublisher(int id);
-    /** Returns one `Publisher` based on given `id`. */
-    Publisher searchId(int id);
-    /** Returns one `Publisher` based on given `email`. */
-    Publisher searchEmail(string email);
-    /** Lazily searches names of `Publishers`, then return a constant vector. */
-    vector<Publisher>& searchName(string name);
-    /** Lazily searches phone numbers of `Publishers`, then return a constant vector. */
-    vector<Publisher>& searchPhone(string phone);
-    /** Returns a constant vector containing all `Publishers` sorted ascendingly/descendingly based on `Publisher.name` attribute. */
-    vector<Publisher>& sortPublishers(bool ascending = true);
+
+    /** Returns constant pointer vector storing all `Publishers`. */
+    const vector<Publisher>* getAllPublishers() const;
     
+    /** Creates a new `Publisher`, then returns its index inside the `Publisher` vector.  */
+    int createPublisher(string email, string password, string name, string phone, string about);
+
+    /** Modifies data of a `Publisher` with specified `id`. */
+    void editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newPhone = "", string about = "");
+
+    /** Deletes a `Publisher` with specified `id`. */
+    void deletePublisher(int id);
+
+
+
+    /** Save `Publishers` to database. */
+    void savePublishers() const;
+
+    /** Returns the index of a `Publisher` with specified `id`. */
+    int searchId(int id) const;
+
+    /** Returns the index of a `Publisher` based on given `email`. */
+    int searchEmail(string email) const;
+
+    /** Searches names of `Publishers`, then return a constant vector. */
+    vector<Publisher>* searchName(string name) const;
 };
 
 #endif
