@@ -48,6 +48,9 @@ class PublisherManager
     /** Save `Publishers` to database. */
     void savePublishers() const;
 
+    /** Stores `Publisher` inside database and deletes DMA inside `Publisher` class. */
+    ~PublisherManager();
+
     /** Returns the index of a `Publisher` with specified `id`. */
     int searchId(int id) const;
 
@@ -55,7 +58,7 @@ class PublisherManager
     int searchEmail(string email) const;
 
     /** Searches names of `Publishers`, then return a constant vector. */
-    vector<Publisher>* searchName(string name) const;
+    vector<Publisher> searchName(string name) const;
 };
 
 #endif
