@@ -52,22 +52,50 @@ PublisherManager::PublisherManager()
     nextPublisherId = (*publishers)[totalPublishers-1].id + 1;
 }
 
-vector<Publisher> PublisherManager::getPublishers()
+const vector<Publisher>* PublisherManager::getAllPublishers() const
 {
   return publishers;
 }
 
-Publisher PublisherManager::createPublisher(string email, string password, string name, string phone, string about)
+int PublisherManager::createPublisher(string email, string password, string name, string about, string phone)
 {
-  publishers.push_back(Publisher{nextId, email, password, name, phone, about});
+  publishers->push_back(Publisher{ nextPublisherId, email, password, name, about, phone });
+  nextPublisherId++;
   totalPublishers++;
-  nextId++;
-  return publishers.back();
+  return totalPublishers-1;
 }
 
-Publisher PublisherManager::searchId(int id)
+void PublisherManager::editPublisher(int id, string newEmail = "", string newPassword, string newName = "", string newAbout = "", string newPhone = "")
+{
+  int index = searchId(id);
+  Publisher* p = &(publishers->at(index));
+  
+  if (newEmail != "")
+    p->email = newEmail;
+  if (newPassword != "")
+    p->password = newPassword;
+  if (newName != "")
+    p->name = newName;
+  if (newAbout != "")
+    p->about = newAbout;
+  if (newPhone != "")
+    p->phone = newPhone;
+}
+
+void PublisherManager::deletePublisher(int id)
+{
+  int index = searchId(id);
+  publishers->erase(publishers->begin()+index);
+}
+
+void PublisherManager::savePublishers() const
+{
+
+}
+
+vector<Publisher> PublisherManager::searchId(int id) const
 { 
-  for (auto it = publishers.begin(); it < publishers.end(); it++)
+  for (auto it = publishers->begin(); it < publishers->end(); it++)
   {
     if (it->id == id)
     {
