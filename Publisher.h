@@ -25,12 +25,14 @@ class PublisherManager
     /** Tracks next unique value for `Publisher.id` */
     static int nextId;
   public:
+    /** Loads `Publishers` from publishers.txt */
+    PublisherManager();
     /** Returns a constant vector containing all `Publishers`. */
-    const vector<Publisher>& getPublishers() const;
+    vector<Publisher>& getPublishers();
     /** Creates a new `Publisher`, then returns its constant pointer.  */
-    const Publisher& createPublisher(string email, string password, string name, string phone, string about) const;
+    Publisher createPublisher(string email, string password, string name, string phone, string about);
     /** Modifies data inside a `Publisher`, then return its constant pointer. */
-    const Publisher& editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newPhone = "", string about = "") const;
+    Publisher editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newPhone = "", string about = "");
     /** Deletes a `Publisher`. */
     void deletePublisher(int id) const;
     /** Returns one `Publisher` based on given `id`. */
