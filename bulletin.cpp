@@ -1,72 +1,71 @@
-#include <Publisher.h>
-#include <News.h>
+#include "Bulletin.h"
 #include <fstream>
 #include <sstream>
+#include <iostream>
 using namespace std;
 
-// TODO Settle file operations
-
-
 int PublisherManager::totalPublishers = 0;
-int PublisherManager::nextId = 1;
+int PublisherManager::nextPublisherId = 1;
+int NewsManager::totalNews = 0;
+int NewsManager::nextNewsId = 1;
+string Bulletin::version = "0.0.1";
 
 PublisherManager::PublisherManager()
 {
-  ifstream inPub("data/publishers.txt");
-
-  if (!inPub.is_open())
+  ifstream file("database/publishers.txt");
+  
+  if (!file.is_open())
   {
-    ofstream outPub("data/publishers.txt");
-    outPub << "id^email^password^name^about^phone\n";
-    outPub.close();
+    throw "Failed to open database/publishers.txt";
   }
-  else
+  
+  string line;
+  getline(file, line);  // Skip first line as it is header of the file
+  while (getline(file, line))
   {
-    string line;
-    getline(inPub, line);
-    while (getline(inPub, line))
+    string id, email, password, name, about, phone;
+    stringstream ss(line);
+    vector<string> fields;
+
+    // Split by ^ (the delimiter)
+    while (getline(ss, id, '^'))
     {
-      stringstream ss(line);
-      string data[6];
-      int i = 0;
-      while (getline(ss, line, '^'))
-      {
-        data[i++] = line;
-      }
-
-      publishers.push_back(Publisher{
-        stoi(data[0]), data[1], data[2], data[3], data[4], data[5]
-      });
-
-      totalPublishers++;
+      fields.push_back(id);
     }
     
-    nextId = publishers[totalPublishers-1].id + 1;
+    if (fields.size() == 6)
+    {
+      (*publishers).push_back(Publisher
+      {
+        stoi(fields[0]),
+        fields[1],
+        fields[2], 
+        fields[3],
+        fields[4],
+        fields[5]
+      });
+    }
+
+    totalPublishers++;
   }
+  if (totalPublishers > 0)
+    nextPublisherId = (*publishers)[totalPublishers-1].id + 1;
 }
 
-vector<Publisher>& PublisherManager::getPublishers()
+vector<Publisher> PublisherManager::getPublishers()
 {
   return publishers;
 }
 
 Publisher PublisherManager::createPublisher(string email, string password, string name, string phone, string about)
 {
-  publishers.push_back(Publisher{ nextId, email, password, name, phone, about });
-  nextId++;
+  publishers.push_back(Publisher{nextId, email, password, name, phone, about});
   totalPublishers++;
+  nextId++;
+  return publishers.back();
 }
 
-Publisher editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newPhone = "", string about = "")
-{
-  
-  if (newEmail)
-  {
-    
-  }
-}
-
-const Publisher& PublisherManager::searchId(int id) const
+Publisher PublisherManager::searchId(int id)
 { 
   for (auto it = publishers.begin(); it < publishers.end(); it++)
   {
@@ -78,7 +77,7 @@ const Publisher& PublisherManager::searchId(int id) const
   throw "ID doesn't exist";
 }
 
-const Publisher& PublisherManager::searchEmail(string email) const
+Publisher PublisherManager::searchEmail(string email)
 {
   for (auto it = publishers.begin(); it < publishers.end(); it++)
   {
@@ -88,4 +87,25 @@ const Publisher& PublisherManager::searchEmail(string email) const
     }
   }
   throw "Email doesn't exist";
+}
+
+int main()
+{
+  PublisherManager publisherManager = PublisherManager();
+  vector<Publisher> publishers = publisherManager.getPublishers();
+  publishers[0].about = "Hello World";
+  for (auto it = publishers.begin(); it < publishers.end(); it++)
+  {
+    cout << it->id << " " << it->email << " " << it->password << " " << it->name << " " << it->phone << " " << it->about << endl;
+  }
+  vector<Publisher> publishers2 = publisherManager.getPublishers();
+  publishers2[0].name = "Hello World";
+    for (auto it = publishers2.begin(); it < publishers2.end(); it++)
+  {
+    cout << it->id << " " << it->email << " " << it->password << " " << it->name << " " << it->phone << " " << it->about << endl;
+  }
+    for (auto it = publishers.begin(); it < publishers.end(); it++)
+  {
+    cout << it->id << " " << it->email << " " << it->password << " " << it->name << " " << it->phone << " " << it->about << endl;
+  }
 }
