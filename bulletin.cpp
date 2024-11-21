@@ -1,12 +1,14 @@
-#include "Publisher.h"
-#include "News.h"
+#include "Bulletin.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
 using namespace std;
 
 int PublisherManager::totalPublishers = 0;
-int PublisherManager::nextId = 1;
+int PublisherManager::nextPublisherId = 1;
+int NewsManager::totalNews = 0;
+int NewsManager::nextNewsId = 1;
+string Bulletin::version = "0.0.1";
 
 PublisherManager::PublisherManager()
 {
@@ -33,7 +35,7 @@ PublisherManager::PublisherManager()
     
     if (fields.size() == 6)
     {
-      publishers.push_back(Publisher
+      (*publishers).push_back(Publisher
       {
         stoi(fields[0]),
         fields[1],
@@ -45,8 +47,9 @@ PublisherManager::PublisherManager()
     }
 
     totalPublishers++;
-    nextId++;
   }
+  if (totalPublishers > 0)
+    nextPublisherId = (*publishers)[totalPublishers-1].id + 1;
 }
 
 vector<Publisher> PublisherManager::getPublishers()
