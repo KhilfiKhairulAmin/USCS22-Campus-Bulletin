@@ -25,7 +25,7 @@ class PublisherManager
     static int totalPublishers;
 
     /** Tracks next unique value for `Publisher.id` */
-    static int nextId;
+    static int nextPublisherId;
 
   public:
     /** Loads `Publishers` from database. */

@@ -7,7 +7,8 @@ using namespace std;
 class Bulletin: public News, public Publisher
 {
   private:
-
+    static string version;
+    
   public:
     /** Loads `Publishers` and `News` from database. */
     Bulletin();

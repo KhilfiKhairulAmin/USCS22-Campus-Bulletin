@@ -27,10 +27,10 @@ class NewsManager
     vector<News>* news;
 
     /** Keeps total number of news */
-    static int totalPublishers;
+    static int totalNews;
 
     /** Tracks next unique value for `News.id` */
-    static int nextId;
+    static int nextNewsId;
 
   public:
     /** Returns a constant vector containing all `News`. */
