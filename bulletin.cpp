@@ -23,7 +23,7 @@ PublisherManager::PublisherManager()
   getline(file, line);  // Skip first line as it is header of the file
   while (getline(file, line))
   {
-    string id, email, password, name, about, phone;
+    string id;
     stringstream ss(line);
     vector<string> fields;
 
@@ -33,18 +33,15 @@ PublisherManager::PublisherManager()
       fields.push_back(id);
     }
     
-    if (fields.size() == 6)
-    {
-      Publisher pub = {
+      publishers->push_back(Publisher{
         stoi(fields[0]),
         fields[1],
         fields[2], 
         fields[3],
         fields[4],
         fields[5]
-      };
-      publishers->push_back(pub);
-    }
+      });
+    
 
     totalPublishers++;
   }
@@ -67,7 +64,7 @@ int PublisherManager::createPublisher(string email, string password, string name
 
 void PublisherManager::editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newAbout = "", string newPhone = "")
 {
-  int index = searchId(id);
+  int index = searchPublisherId(id);
   Publisher* p = &(publishers->at(index));
   
   if (newEmail != "")
@@ -84,7 +81,7 @@ void PublisherManager::editPublisher(int id, string newEmail = "", string newPas
 
 void PublisherManager::deletePublisher(int id)
 {
-  int index = searchId(id);
+  int index = searchPublisherId(id);
   publishers->erase(publishers->begin()+index);
 }
 
@@ -95,6 +92,7 @@ void PublisherManager::savePublishers() const
   if (!outPub.is_open())
     throw "Failed to open database/publishers.txt";
   
+  outPub << "id^email^password^name^about^phone\n";
   for (auto it = publishers->begin(); it < publishers->end(); it++)
     outPub << it->id << "^" << it->email << "^" << it->password << "^" << it->name << "^" << it->about << "^" << it->phone << "\n";
 
@@ -108,7 +106,7 @@ PublisherManager::~PublisherManager()
   publishers = nullptr;
 }
 
-int PublisherManager::searchId(int id) const
+int PublisherManager::searchPublisherId(int id) const
 { 
   int index = 0;
   for (auto it = publishers->begin(); it < publishers->end(); it++)
@@ -140,9 +138,11 @@ int main()
 {
   PublisherManager publisherManager = PublisherManager();
   const vector<Publisher>* publishers = publisherManager.getAllPublishers();
-  auto it = publishers->begin();
-  for (; it < publishers->end(); it++)
-  {
-    cout << it->name << endl;
-  }
+  // publisherManager.deletePublisher(2);
+  int index = publisherManager.searchEmail("stfu@gmail.com");
+  cout << index;
+  // for (auto it = publishers->begin(); it < publishers->end(); it++)
+  // {
+  //   cout << it->name << endl;
+  // }
 }

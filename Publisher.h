@@ -19,7 +19,7 @@ class PublisherManager
 {
   protected:
     /** Vector containing `Publishers`. */
-    vector<Publisher>* publishers;
+    vector<Publisher>* publishers = new vector<Publisher>();
 
     /** Keeps total number of publishers */
     static int totalPublishers;
@@ -52,7 +52,7 @@ class PublisherManager
     ~PublisherManager();
 
     /** Returns the index of a `Publisher` with specified `id`. */
-    int searchId(int id) const;
+    int searchPublisherId(int id) const;
 
     /** Returns the index of a `Publisher` based on given `email`. */
     int searchEmail(string email) const;
