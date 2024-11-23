@@ -2,6 +2,8 @@
 #define DATETIME_H
 #include <ctime>
 #include <string>
+#include <sstream>
+#include <fstream>
 using namespace std;
 
 struct Date
@@ -64,6 +66,42 @@ struct Datetime: Date, Time
     Time t = getCurrentTime();
     
     return Datetime{ d.year, d.month, d.day, d.dayName, t.hour, t.minute, t.second }; 
+  }
+
+  static Datetime sToDatetime(string datetimeString)
+  {
+    stringstream ss(datetimeString);
+    string d;
+    int ds[6];
+    int i = 0;
+    while(getline(ss, d, '/'))
+    {
+      ds[i++] = stoi(d);
+    }
+    return Datetime{
+      ds[2],
+      ds[1],
+      ds[0],
+      getDayName(ds[0], ds[1], ds[2]),
+      ds[3],
+      ds[4],
+      ds[5]
+    };
+  }
+
+  static string datetimeToS(Datetime dt)
+  {
+    return to_string(dt.day) + "/" + to_string(dt.month) + "/" + to_string(dt.year) + "/" + to_string(dt.hour) + "/" + to_string(dt.minute) + "/" + to_string(dt.second);
+  }
+
+  bool operator>=(Date dt)
+  {
+    return year >= dt.year && month >= dt.month && day >= dt.day;
+  }
+
+  bool operator<=(Date dt)
+  {
+    return year <= dt.year && month <= dt.month && day <= dt.day;
   }
 };
 

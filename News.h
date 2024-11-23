@@ -40,10 +40,13 @@ class NewsManager
     int createNews(int publisherId, string title, string content);
 
     /** Modifies data inside a `News` with specified `id`. */
-    void editNews(int id, string newTitle = "", string newContent = "");
+    void editNews(int id, string newTitle, string newContent);
 
     /** Deletes a `News` with specified `id`. */
     void deleteNews(int id);
+
+    /** Loads `News` from database. */
+    NewsManager();
 
     /** Saves `News` inside the database. */
     void saveNews() const;
@@ -55,10 +58,10 @@ class NewsManager
     int searchNewsId(int id) const;
 
     /** Searches title of `News`, then return a constant vector. */
-    const vector<News> searchTitle(string title) const;
+    vector<News> searchTitle(string title) const;
 
     /** Searches news published between `dt_start` and `dt_end`. */
-    const vector<News> searchDate(Datetime dt_start, Datetime dt_end) const;
+    vector<News> searchDate(Datetime dt_start, Datetime dt_end) const;
 };
 
 #endif
