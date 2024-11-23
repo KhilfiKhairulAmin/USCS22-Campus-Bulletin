@@ -35,15 +35,15 @@ PublisherManager::PublisherManager()
     
     if (fields.size() == 6)
     {
-      (*publishers).push_back(Publisher
-      {
+      Publisher pub = {
         stoi(fields[0]),
         fields[1],
         fields[2], 
         fields[3],
         fields[4],
         fields[5]
-      });
+      };
+      publishers->push_back(pub);
     }
 
     totalPublishers++;
@@ -65,7 +65,7 @@ int PublisherManager::createPublisher(string email, string password, string name
   return totalPublishers-1;
 }
 
-void PublisherManager::editPublisher(int id, string newEmail = "", string newPassword, string newName = "", string newAbout = "", string newPhone = "")
+void PublisherManager::editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newAbout = "", string newPhone = "")
 {
   int index = searchId(id);
   Publisher* p = &(publishers->at(index));
@@ -90,29 +90,48 @@ void PublisherManager::deletePublisher(int id)
 
 void PublisherManager::savePublishers() const
 {
+  ofstream outPub("database/publishers.txt");
 
+  if (!outPub.is_open())
+    throw "Failed to open database/publishers.txt";
+  
+  for (auto it = publishers->begin(); it < publishers->end(); it++)
+    outPub << it->id << "^" << it->email << "^" << it->password << "^" << it->name << "^" << it->about << "^" << it->phone << "\n";
+
+  outPub.close();
 }
 
-vector<Publisher> PublisherManager::searchId(int id) const
+PublisherManager::~PublisherManager()
+{
+  savePublishers();
+  delete publishers;
+  publishers = nullptr;
+}
+
+int PublisherManager::searchId(int id) const
 { 
+  int index = 0;
   for (auto it = publishers->begin(); it < publishers->end(); it++)
   {
     if (it->id == id)
     {
-      return *it;
+      return index;
     }
+    index++;
   }
   throw "ID doesn't exist";
 }
 
-Publisher PublisherManager::searchEmail(string email)
+int PublisherManager::searchEmail(string email) const
 {
-  for (auto it = publishers.begin(); it < publishers.end(); it++)
+  int index = 0;
+  for (auto it = publishers->begin(); it < publishers->end(); it++)
   {
     if (it->email == email)
     {
-      return *it;
+      return index;
     }
+    index++;
   }
   throw "Email doesn't exist";
 }
@@ -120,20 +139,10 @@ Publisher PublisherManager::searchEmail(string email)
 int main()
 {
   PublisherManager publisherManager = PublisherManager();
-  vector<Publisher> publishers = publisherManager.getPublishers();
-  publishers[0].about = "Hello World";
-  for (auto it = publishers.begin(); it < publishers.end(); it++)
+  const vector<Publisher>* publishers = publisherManager.getAllPublishers();
+  auto it = publishers->begin();
+  for (; it < publishers->end(); it++)
   {
-    cout << it->id << " " << it->email << " " << it->password << " " << it->name << " " << it->phone << " " << it->about << endl;
-  }
-  vector<Publisher> publishers2 = publisherManager.getPublishers();
-  publishers2[0].name = "Hello World";
-    for (auto it = publishers2.begin(); it < publishers2.end(); it++)
-  {
-    cout << it->id << " " << it->email << " " << it->password << " " << it->name << " " << it->phone << " " << it->about << endl;
-  }
-    for (auto it = publishers.begin(); it < publishers.end(); it++)
-  {
-    cout << it->id << " " << it->email << " " << it->password << " " << it->name << " " << it->phone << " " << it->about << endl;
+    cout << it->name << endl;
   }
 }

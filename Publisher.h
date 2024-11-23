@@ -38,7 +38,7 @@ class PublisherManager
     int createPublisher(string email, string password, string name, string phone, string about);
 
     /** Modifies data of a `Publisher` with specified `id`. */
-    void editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newPhone = "", string about = "");
+    void editPublisher(int id, string newEmail, string newPassword, string newName, string newAbout, string newPhone);
 
     /** Deletes a `Publisher` with specified `id`. */
     void deletePublisher(int id);
