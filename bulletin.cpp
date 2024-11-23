@@ -134,6 +134,59 @@ int PublisherManager::searchEmail(string email) const
   throw "Email doesn't exist";
 }
 
+const vector<News>* NewsManager::getAllNews() const
+{
+  return news;
+}
+
+int NewsManager::createNews(int publisherId, string title, string content)
+{
+  Datetime now = Datetime::getCurrentDatetime();
+  news->push_back(News {
+    nextNewsId,
+    publisherId,
+    now,
+    now,
+    Datetime(),
+    title,
+    content,
+    0,
+    0,
+    false
+  });
+}
+
+void NewsManager::editNews(int id, string newTitle = "", string newContent = "")
+{
+  int index = searchNewsId(id);
+  Datetime now = Datetime::getCurrentDatetime();
+  
+  news->at(index).editedAt = now;
+  if (newTitle == "")
+    news->at(index).title = newTitle;
+  if (newContent == "")
+    news->at(index).content = newContent;
+}
+
+void NewsManager::deleteNews(int id)
+{
+  int index = searchNewsId(id);
+  news->erase(news->begin()+index);
+}
+
+int NewsManager::searchNewsId(int id) const
+{
+  int index = 0;
+  for (auto it = news->begin(); it < news->end(); it++)
+  {
+    if (it->id == id)
+    {
+      return index;
+    }
+  }
+  throw "ID doesn't exist";
+}
+
 int main()
 {
   PublisherManager publisherManager = PublisherManager();

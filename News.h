@@ -34,68 +34,25 @@ class NewsManager
 
   public:
     /** Returns a constant vector containing all `News`. */
-    const vector<News>* getAllNews() const
-    {
-      return news;
-    }
+    const vector<News>* getAllNews() const;
 
     /** Creates a `News`, then return the index of the `News`.  */
-    int createNews(int publisherId, string title, string content)
-    {
-      Datetime now = Datetime::getCurrentDatetime();
-      news->push_back(News {
-        nextNewsId,
-        publisherId,
-        now,
-        now,
-        now,
-        title,
-        content,
-        0,
-        0
-      });
-      totalNews++;
-      nextNewsId++;
-      return totalNews-1;
-    }
-    
+    int createNews(int publisherId, string title, string content);
+
     /** Modifies data inside a `News` with specified `id`. */
-    void editNews(int id, string newTitle = "", string newContent = "")
-    {
-      Datetime now = Datetime::getCurrentDatetime();
-    }
+    void editNews(int id, string newTitle = "", string newContent = "");
 
     /** Deletes a `News` with specified `id`. */
-    void deleteNews(int id)
-    {
-
-    }
+    void deleteNews(int id);
 
     /** Saves `News` inside the database. */
-    void saveNews() const
-    {
-
-    }
+    void saveNews() const;
 
     /** Stores `News` inside database and deletes DMA inside `News` class. */
-    ~NewsManager()
-    {
-      
-    }
+    ~NewsManager();
 
     /** Returns index of `News` with specified `id`. */
-    int searchId(int id) const
-    {
-      int index = 0;
-      for (auto it = news->begin(); it < news->end(); it++)
-      {
-        if (it->id == id)
-        {
-          return index;
-        }
-      }
-      throw "ID doesn't exist";
-    }
+    int searchNewsId(int id) const;
 
     /** Searches title of `News`, then return a constant vector. */
     const vector<News> searchTitle(string title) const;
