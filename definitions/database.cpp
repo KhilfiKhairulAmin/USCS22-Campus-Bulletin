@@ -141,18 +141,16 @@ int PublisherManager::searchEmail(string email) const
   throw "Email doesn't exist";
 }
 
-vector<int> PublisherManager::searchName(string name) const
+vector<Publisher> PublisherManager::searchName(string name) const
 {
-  vector<int> res;
-  int cur = 0;
+  vector<Publisher> res;
   for (auto it = publishers->begin(); it < publishers->end(); it++)
   {
     string t = toLowerCase(it->name);
     string search = toLowerCase(name);
 
     if (t.find(search) != string::npos)
-      res.push_back(cur);
-    cur++;
+      res.push_back(*it);
   }
   return res;
 }
@@ -278,29 +276,25 @@ NewsManager::~NewsManager()
 
 vector<int> NewsManager::searchTitle(string title) const
 {
-  vector<int> res;
-  int cur = 0;
+  vector<News> res;
   for (auto it = news->begin(); it < news->end(); it++)
   {
     string t = toLowerCase(it->title);
     string search = toLowerCase(title);
 
     if (t.find(search) != string::npos)
-      res.push_back(cur);
-    cur++;
+      res.push_back(*it);
   }
   return res;
 }
 
-vector<int> NewsManager::searchDate(Datetime dt_start, Datetime dt_end) const
+vector<News> NewsManager::searchDate(Datetime dt_start, Datetime dt_end) const
 {
-  vector<int> res;
-  int cur = 0;
+  vector<News> res;
   for (auto it = news->begin(); it < news->end(); it++)
   {
     if (it->createdAt >= dt_start && it->createdAt <= dt_end)
-      res.push_back(cur);
-    cur++;
+      res.push_back(*it);
   }
   return res;
 }
