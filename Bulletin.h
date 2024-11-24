@@ -4,7 +4,7 @@
 #include "Publisher.h"
 using namespace std;
 
-class Bulletin: public News, public Publisher
+class Bulletin: public NewsManager, public PublisherManager
 {
   private:
     static string version;
@@ -14,16 +14,16 @@ class Bulletin: public News, public Publisher
     Bulletin();
 
     /** Get all `News` published by a `Publisher` with specified `id`. */
-    vector<News> getNewsByPublisher(int id) const;
+    vector<int> getNewsByPublisher(int publisherId) const;
 
     /** Get total likes from the `Publisher` with specified `id`. */
-    int getTotalLikes(int id) const;
+    int getTotalLikes(int publisherId) const;
 
     /** Get total dislikes from the `Publisher` with specified `id`. */
-    int getTotalDislikes(int id) const;
+    int getTotalDislikes(int publisherId) const;
 
     /** Get total `News` published by `Publisher` with specified `id`.  */
-    int getTotalNewsPublished(int id) const;
+    int getTotalNewsPublished(int publisherId) const;
 
     /** Get total `Publishers` registered inside the database. */
     int getTotalPublishers() const;

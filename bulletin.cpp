@@ -297,6 +297,60 @@ vector<News> NewsManager::searchDate(Datetime dt_start, Datetime dt_end) const
   return res;
 }
 
+Bulletin::Bulletin(): NewsManager(), PublisherManager() {};
+
+vector<int> Bulletin::getNewsByPublisher(int publisherId) const
+{
+  int cur = 0;
+  vector<int> indexes;
+  for (auto it = news->begin(); it < news->end();it++)
+  {
+    if (it->publisherId == publisherId)
+      indexes.push_back(cur);
+    cur++;
+  }
+  return indexes;
+}
+
+int Bulletin::getTotalLikes(int publisherId) const
+{
+  int total = 0;
+  for (auto it = news->begin(); it < news->end();it++)
+    if (it->publisherId == publisherId)
+      total += it->numOfLikes;
+  return total;
+}
+
+int Bulletin::getTotalDislikes(int publisherId) const
+{
+  int total = 0;
+  for (auto it = news->begin(); it < news->end();it++)
+    if (it->publisherId == publisherId)
+      total += it->numOfDislikes;
+  return total;
+}
+
+int Bulletin::getTotalNewsPublished(int publisherId) const
+{
+  int total = 0;
+  for (auto it = news->begin(); it < news->end();it++)
+    if (it->publisherId == publisherId)
+      total++;
+  return total;
+}
+
+int Bulletin::getTotalPublishers() const
+{
+  return totalPublishers;
+}
+
+int Bulletin::getTotalNews() const
+{
+  return totalPublishers;
+}
+
+Bulletin::~Bulletin() {};
+
 int main()
 {
   // PublisherManager publisherManager = PublisherManager();
