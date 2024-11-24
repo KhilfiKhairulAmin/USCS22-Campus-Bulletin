@@ -58,10 +58,10 @@ class NewsManager
     int searchNewsId(int id) const;
 
     /** Searches title of `News`, then return a constant vector. */
-    vector<Publisher> searchTitle(string title) const;
+    vector<News> searchTitle(string title) const;
 
     /** Searches news published between `dt_start` and `dt_end`. */
-    vector<Publisher> searchDate(Datetime dt_start, Datetime dt_end) const;
+    vector<News> searchDate(Datetime dt_start, Datetime dt_end) const;
 };
 
 #endif

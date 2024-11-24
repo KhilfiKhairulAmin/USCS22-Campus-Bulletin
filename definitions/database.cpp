@@ -274,7 +274,7 @@ NewsManager::~NewsManager()
   news = nullptr;
 }
 
-vector<int> NewsManager::searchTitle(string title) const
+vector<News> NewsManager::searchTitle(string title) const
 {
   vector<News> res;
   for (auto it = news->begin(); it < news->end(); it++)
