@@ -1,3 +1,3 @@
-g++ main.cpp interactive.cpp -o app.exe
+g++ bulletin.cpp main.cpp -o app.exe
 
 ./app.exe

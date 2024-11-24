@@ -1,4 +1,4 @@
-#include "Bulletin.h"
+#include "headers/Database.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -9,7 +9,7 @@ int PublisherManager::totalPublishers = 0;
 int PublisherManager::nextPublisherId = 1;
 int NewsManager::totalNews = 0;
 int NewsManager::nextNewsId = 1;
-string Bulletin::version = "0.0.1";
+string Database::version = "0.0.1";
 
 string toLowerCase(const string& str) {
     string lowerStr = str;
@@ -305,9 +305,9 @@ vector<int> NewsManager::searchDate(Datetime dt_start, Datetime dt_end) const
   return res;
 }
 
-Bulletin::Bulletin(): NewsManager(), PublisherManager() {};
+Database::Database(): NewsManager(), PublisherManager() {};
 
-vector<int> Bulletin::getNewsByPublisher(int publisherId) const
+vector<int> Database::getNewsByPublisher(int publisherId) const
 {
   int cur = 0;
   vector<int> indexes;
@@ -320,7 +320,7 @@ vector<int> Bulletin::getNewsByPublisher(int publisherId) const
   return indexes;
 }
 
-int Bulletin::getTotalLikes(int publisherId) const
+int Database::getTotalLikes(int publisherId) const
 {
   int total = 0;
   for (auto it = news->begin(); it < news->end();it++)
@@ -329,7 +329,7 @@ int Bulletin::getTotalLikes(int publisherId) const
   return total;
 }
 
-int Bulletin::getTotalDislikes(int publisherId) const
+int Database::getTotalDislikes(int publisherId) const
 {
   int total = 0;
   for (auto it = news->begin(); it < news->end();it++)
@@ -338,7 +338,7 @@ int Bulletin::getTotalDislikes(int publisherId) const
   return total;
 }
 
-int Bulletin::getTotalNewsPublished(int publisherId) const
+int Database::getTotalNewsPublished(int publisherId) const
 {
   int total = 0;
   for (auto it = news->begin(); it < news->end();it++)
@@ -347,17 +347,17 @@ int Bulletin::getTotalNewsPublished(int publisherId) const
   return total;
 }
 
-int Bulletin::getTotalPublishers() const
+int Database::getTotalPublishers() const
 {
   return totalPublishers;
 }
 
-int Bulletin::getTotalNews() const
+int Database::getTotalNews() const
 {
   return totalPublishers;
 }
 
-vector<array<int, 2>> Bulletin::getPopularityRankings() const
+vector<array<int, 2>> Database::getPopularityRankings() const
 {
   struct IndexSum
   {
@@ -394,39 +394,4 @@ vector<array<int, 2>> Bulletin::getPopularityRankings() const
   return ids;
 }
 
-Bulletin::~Bulletin() {};
-
-int main()
-{
-  // PublisherManager publisherManager = PublisherManager();
-  // const vector<Publisher>* publishers = publisherManager.getAllPublishers();
-  // // publisherManager.deletePublisher(2);
-  // int index = publisherManager.searchEmail("stfu@gmail.com");
-  // cout << index;
-  // for (auto it = publishers->begin(); it < publishers->end(); it++)
-  // {
-  //   cout << it->name << endl;
-  // }
-  // NewsManager nm = NewsManager();
-  // const vector<News>* n = nm.getAllNews();
-  // Datetime dt = Datetime::getCurrentDatetime();
-  // vector<int> s = nm.searchDate(Datetime::sToDatetime("2/11/2024/21/11/5"), Datetime::sToDatetime("2/11/2024/21/11/5"));
-
-  // for (int a: s)
-  // {
-  //   News nn = n->at(a);
-  //   cout << nn.title << nn.isPublished << endl;
-  // }
-
-  Bulletin b = Bulletin();
-  const vector<Publisher>* p = b.getAllPublishers();
-  const vector<News>* n = b.getAllNews();
-  vector<array<int, 2>> a = b.getPopularityRankings();
-
-  cout << "Publisher: Popularity\n";
-  for (auto it = a.begin(); it < a.end(); it++)
-  {
-    Publisher pub = p->at(it->at(0));
-    cout << pub.name << ": " << it->at(1) << endl;
-  }
-}
+Database::~Database() {};

@@ -1,5 +1,5 @@
-#ifndef BULLETIN_H
-#define BULLETIH_H
+#ifndef DATABASE_H
+#define DATABASE_H
 #include "News.h"
 #include "Publisher.h"
 #include <vector>
@@ -7,14 +7,14 @@
 #include <array>
 using namespace std;
 
-class Bulletin: public NewsManager, public PublisherManager
+class Database: public NewsManager, public PublisherManager
 {
   private:
     static string version;
     
   public:
     /** Loads `Publishers` and `News` from database. */
-    Bulletin();
+    Database();
 
     /** Get all `News` published by a `Publisher` with specified `id`. */
     vector<int> getNewsByPublisher(int publisherId) const;
@@ -38,7 +38,7 @@ class Bulletin: public NewsManager, public PublisherManager
     vector<array<int, 2>> getPopularityRankings() const;
 
     /** Writes `Publishers` and `News` into database and deletes DMA inside the program. */
-    ~Bulletin();
+    ~Database();
 };
 
 
