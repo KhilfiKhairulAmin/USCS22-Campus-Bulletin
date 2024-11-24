@@ -58,7 +58,7 @@ class PublisherManager
     int searchEmail(string email) const;
 
     /** Searches names of `Publishers`, then return a constant vector. */
-    vector<Publisher> searchName(string name) const;
+    vector<int> searchName(string name) const;
 };
 
 #endif

@@ -2,6 +2,9 @@
 #define BULLETIH_H
 #include "News.h"
 #include "Publisher.h"
+#include <vector>
+#include <unordered_map>
+#include <array>
 using namespace std;
 
 class Bulletin: public NewsManager, public PublisherManager
@@ -32,7 +35,7 @@ class Bulletin: public NewsManager, public PublisherManager
     int getTotalNews() const;
 
     /** Get popularity rank of `Publishers`. */
-    vector<Publisher> getPopularityRankings() const;
+    vector<array<int, 2>> getPopularityRankings() const;
 
     /** Writes `Publishers` and `News` into database and deletes DMA inside the program. */
     ~Bulletin();

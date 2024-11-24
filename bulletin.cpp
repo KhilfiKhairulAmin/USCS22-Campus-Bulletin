@@ -11,6 +11,12 @@ int NewsManager::totalNews = 0;
 int NewsManager::nextNewsId = 1;
 string Bulletin::version = "0.0.1";
 
+string toLowerCase(const string& str) {
+    string lowerStr = str;
+    transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
+    return lowerStr;
+}
+
 PublisherManager::PublisherManager()
 {
   ifstream file("database/publishers.txt");
@@ -135,6 +141,22 @@ int PublisherManager::searchEmail(string email) const
   throw "Email doesn't exist";
 }
 
+vector<int> PublisherManager::searchName(string name) const
+{
+  vector<int> res;
+  int cur = 0;
+  for (auto it = publishers->begin(); it < publishers->end(); it++)
+  {
+    string t = toLowerCase(it->name);
+    string search = toLowerCase(name);
+
+    if (t.find(search) != string::npos)
+      res.push_back(cur);
+    cur++;
+  }
+  return res;
+}
+
 const vector<News>* NewsManager::getAllNews() const
 {
   return news;
@@ -254,45 +276,31 @@ NewsManager::~NewsManager()
   news = nullptr;
 }
 
-string toLowerCase(const string& str) {
-    string lowerStr = str;
-    transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
-    return lowerStr;
-}
-
-bool findSimilarTitle(const string& text, const string& pattern) {
-    string lowerText = toLowerCase(text);
-    string lowerPattern = toLowerCase(pattern);
-
-    // Use string::find for substring search
-    if (lowerText.find(lowerPattern) != string::npos) {
-        return true; // Found a similar title
-    }
-    return false; // No similar title found
-}
-
-vector<News> NewsManager::searchTitle(string title) const
+vector<int> NewsManager::searchTitle(string title) const
 {
-  vector<News> res;
+  vector<int> res;
+  int cur = 0;
   for (auto it = news->begin(); it < news->end(); it++)
   {
     string t = toLowerCase(it->title);
     string search = toLowerCase(title);
 
     if (t.find(search) != string::npos)
-      res.push_back(*it);
+      res.push_back(cur);
+    cur++;
   }
   return res;
 }
 
-vector<News> NewsManager::searchDate(Datetime dt_start, Datetime dt_end) const
+vector<int> NewsManager::searchDate(Datetime dt_start, Datetime dt_end) const
 {
-  vector<News> res;
-
+  vector<int> res;
+  int cur = 0;
   for (auto it = news->begin(); it < news->end(); it++)
   {
     if (it->createdAt >= dt_start && it->createdAt <= dt_end)
-      res.push_back(*it);
+      res.push_back(cur);
+    cur++;
   }
   return res;
 }
@@ -349,6 +357,43 @@ int Bulletin::getTotalNews() const
   return totalPublishers;
 }
 
+vector<array<int, 2>> Bulletin::getPopularityRankings() const
+{
+  struct IndexSum
+  {
+    int i = -1;
+    int sum = 0;
+
+    bool operator<(IndexSum is)
+    {
+      return sum < is.sum;
+    }
+  };
+
+  unordered_map<int, IndexSum> m;
+  int i = 0;
+  for (auto it = publishers->begin(); it < publishers->end(); it++)
+    m.insert(make_pair( it->id, IndexSum{ i++, 0 }));
+
+  int j = 0;
+  for (auto it = news->begin(); it < news->end(); it++)
+    m[it->publisherId].sum += it->numOfLikes - it->numOfDislikes;
+  
+  vector<IndexSum> r;
+  for (auto it = publishers->begin(); it < publishers->end(); it++)
+    r.push_back(m[it->id]);
+
+  sort(r.rbegin(), r.rend());
+
+  vector<array<int, 2>> ids;
+  for (auto it = r.begin(); it < r.end(); it++)
+  {
+    ids.push_back({ it->i, it->sum });
+  }
+  
+  return ids;
+}
+
 Bulletin::~Bulletin() {};
 
 int main()
@@ -362,11 +407,26 @@ int main()
   // {
   //   cout << it->name << endl;
   // }
-  NewsManager nm = NewsManager();
-  const vector<News>* n = nm.getAllNews();
-  Datetime dt = Datetime::getCurrentDatetime();
-  vector<News> s = nm.searchDate(Datetime::sToDatetime("2/11/2024/21/11/5"), Datetime::sToDatetime("2/11/2024/21/11/5"));
+  // NewsManager nm = NewsManager();
+  // const vector<News>* n = nm.getAllNews();
+  // Datetime dt = Datetime::getCurrentDatetime();
+  // vector<int> s = nm.searchDate(Datetime::sToDatetime("2/11/2024/21/11/5"), Datetime::sToDatetime("2/11/2024/21/11/5"));
 
-  for (auto it = s.begin(); it < s.end(); it++)
-    cout << it->title << it->isPublished << endl;
+  // for (int a: s)
+  // {
+  //   News nn = n->at(a);
+  //   cout << nn.title << nn.isPublished << endl;
+  // }
+
+  Bulletin b = Bulletin();
+  const vector<Publisher>* p = b.getAllPublishers();
+  const vector<News>* n = b.getAllNews();
+  vector<array<int, 2>> a = b.getPopularityRankings();
+
+  cout << "Publisher: Popularity\n";
+  for (auto it = a.begin(); it < a.end(); it++)
+  {
+    Publisher pub = p->at(it->at(0));
+    cout << pub.name << ": " << it->at(1) << endl;
+  }
 }
