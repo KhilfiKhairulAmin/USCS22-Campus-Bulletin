@@ -2,15 +2,17 @@
 
 // TODO: Siapkan different parts of UI and flow
 // TODO: Dominate all the other groups by introducing some absurd feature (sound effects, image, data analytics)
+// TODO: Add text sound effect, configuration, calendar view, link opener, text-to-speech, system information
 
 /*-------------------------------------------[ HEADERS & INCLUDES ]------------------------------------------------------------*/
 
 
-#include "headers/Database.h"  // For connecting to the database of the application
-#include <iostream>            // For handling input and output
-#include <iomanip>             // For formatting output
-#include <csignal>             // For handling special input
-#include <conio.h>             // For handling custom input (Windows only; Compiler G++ v11.0.0+)
+#include "headers/Database.h"       // For connecting to the database of the application
+#include "headers/UserInterface.h"  // For reusing same UI components multiple times
+#include <iostream>                 // For handling input and output
+#include <iomanip>                  // For formatting output
+#include <csignal>                  // For handling special input
+#include <conio.h>                  // For handling custom input (Windows only; Compiler G++ v11.0.0+)
 
 #define ENTRY 0         // MENU NUMBER 0
 #define SIGN_UP 1       // MENU NUMBER 1
@@ -50,30 +52,32 @@ void entryMenu(),     // Function prototypes for all menus
 
 int main()
 {
-    Database db = Database();
-    publishers = db.getAllPublishers();
-    
-    mainMenu();
+  Database db = Database();
+  publishers = db.getAllPublishers();
+  
+  mainMenu();
 }
 
 
 /*----------------------------------------[ FUNCTION DEFINITIONS ]-------------------------------------------------------------*/
 
+
 void entryMenu()
 {
-    int s = 0;
-    cout << "SIGN IN / UP";
+  int s = 0;
+  print("SIGN IN / UP");
+  slowPrint("DNWUFIUBWIIBIUFBWIUBIUBFWUFWUBFIWBIWBFI");
 
-    cin >> s;
+  cin >> s;
 
-    if (s == 0)
-        MENU = 1;
-    else
-        MENU = 2;
+  if (s == 0)
+    MENU = 1;
+  else
+    MENU = 2;
 }
 
 void mainMenu()
 {
-    Publisher p = publishers->at(PID);
-    cout << p.name;
+  clear();
+  entryMenu();
 }
