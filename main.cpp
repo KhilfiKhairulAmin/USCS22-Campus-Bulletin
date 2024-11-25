@@ -7,8 +7,8 @@
 /*-------------------------------------------[ HEADERS & INCLUDES ]------------------------------------------------------------*/
 
 
-#include "headers/Database.h"       // For connecting to the database of the application
-#include "headers/UserInterface.h"  // For reusing same UI components multiple times
+#include "include/Database.h"       // For connecting to the database of the application
+#include "include/UserInterface.h"  // For reusing same UI components multiple times
 #include <iostream>                 // For handling input and output
 #include <iomanip>                  // For formatting output
 #include <csignal>                  // For handling special input
