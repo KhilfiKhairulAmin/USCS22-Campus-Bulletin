@@ -40,8 +40,8 @@ void entryMenu(),     // Function prototypes for all menus
      mainMenu(),
      createNews(),
      editNews(),
-     deleteNews(), 
-     editProfile(),  
+     deleteNews(),
+     editProfile(),
      calendar();
 
 

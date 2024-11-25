@@ -14,10 +14,10 @@ class Database: public NewsManager, public PublisherManager
     
   public:
     /** Loads `Publishers` and `News` from database. */
-    Database::Database(): NewsManager(), PublisherManager() {};
+    Database(): NewsManager(), PublisherManager() {};
 
     /** Get all `News` published by a `Publisher` with specified `id`. */
-    vector<int> Database::getNewsByPublisher(int publisherId) const
+    vector<int> getNewsByPublisher(int publisherId) const
     {
       int cur = 0;
       vector<int> indexes;
@@ -31,7 +31,7 @@ class Database: public NewsManager, public PublisherManager
     }
 
     /** Get total likes from the `Publisher` with specified `id`. */
-    int Database::getTotalLikes(int publisherId) const
+    int getTotalLikes(int publisherId) const
     {
       int total = 0;
       for (auto it = news->begin(); it < news->end();it++)
@@ -41,7 +41,7 @@ class Database: public NewsManager, public PublisherManager
     }
 
     /** Get total dislikes from the `Publisher` with specified `id`. */
-    int Database::getTotalDislikes(int publisherId) const
+    int getTotalDislikes(int publisherId) const
     {
       int total = 0;
       for (auto it = news->begin(); it < news->end();it++)
@@ -51,7 +51,7 @@ class Database: public NewsManager, public PublisherManager
     }
 
     /** Get total `News` published by `Publisher` with specified `id`.  */
-    int Database::getTotalNewsPublished(int publisherId) const
+    int getTotalNewsPublished(int publisherId) const
     {
       int total = 0;
       for (auto it = news->begin(); it < news->end();it++)
@@ -61,19 +61,19 @@ class Database: public NewsManager, public PublisherManager
     }
 
     /** Get total `Publishers` registered inside the database. */
-    int Database::getTotalPublishers() const
+    int getTotalPublishers() const
     {
       return totalPublishers;
     }
 
     /** Get total `News` created inside the database. */
-    int Database::getTotalNews() const
+    int getTotalNews() const
     {
       return totalPublishers;
     }
 
     /** Get popularity rank of `Publishers`. */
-    vector<array<int, 2>> Database::getPopularityRankings() const
+    vector<array<int, 2>> getPopularityRankings() const
     {
       struct IndexSum
       {
@@ -111,7 +111,7 @@ class Database: public NewsManager, public PublisherManager
     }
 
     /** Writes `Publishers` and `News` into database and deletes DMA inside the program. */
-    Database::~Database() {};
+    ~Database() {};
 };
 
 int PublisherManager::totalPublishers = 0;

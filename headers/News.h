@@ -4,6 +4,7 @@
 #include "Utility.h"
 #include <string>
 #include <vector>
+#include <fstream>
 
 struct News
 {
@@ -35,13 +36,13 @@ class NewsManager
 
   public:
     /** Returns a constant vector containing all `News`. */
-    const vector<News>* NewsManager::getAllNews() const
+    const vector<News>* getAllNews() const
     {
       return news;
     }
 
     /** Creates a `News`, then return the index of the `News`.  */
-    int NewsManager::createNews(int publisherId, string title, string content)
+    int createNews(int publisherId, string title, string content)
     {
       Datetime now = Datetime::getCurrentDatetime();
       news->push_back(News {
@@ -62,7 +63,7 @@ class NewsManager
     }
 
     /** Modifies data inside a `News` with specified `id`. */
-    void NewsManager::editNews(int id, string newTitle = "", string newContent = "")
+    void editNews(int id, string newTitle = "", string newContent = "")
     {
       int index = searchNewsId(id);
       Datetime now = Datetime::getCurrentDatetime();
@@ -74,7 +75,7 @@ class NewsManager
     }
 
     /** Deletes a `News` with specified `id`. */
-    void NewsManager::deleteNews(int id)
+    void deleteNews(int id)
     {
       int index = searchNewsId(id);
       news->erase(news->begin()+index);
@@ -82,7 +83,7 @@ class NewsManager
     }
 
     /** Loads `News` from database. */
-    NewsManager::NewsManager()
+    NewsManager()
     {
       ifstream file("database/news.txt");
       
@@ -125,7 +126,7 @@ class NewsManager
     }
 
     /** Saves `News` inside the database. */
-    void NewsManager::saveNews() const
+    void saveNews() const
     {
       ofstream outNews("database/news.txt");
 
@@ -139,7 +140,7 @@ class NewsManager
     }
 
     /** Stores `News` inside database and deletes DMA inside `News` class. */
-    NewsManager::~NewsManager()
+    ~NewsManager()
     {
       saveNews();
       delete news;
@@ -147,7 +148,7 @@ class NewsManager
     }
 
     /** Returns index of `News` with specified `id`. */
-    int NewsManager::searchNewsId(int id) const
+    int searchNewsId(int id) const
     {
       int index = 0;
       for (auto it = news->begin(); it < news->end(); it++)
@@ -162,7 +163,7 @@ class NewsManager
     }
 
     /** Searches title of `News`, then return a constant vector. */
-    vector<News> NewsManager::searchTitle(string title) const
+    vector<News> searchTitle(string title) const
     {
       vector<News> res;
       for (auto it = news->begin(); it < news->end(); it++)
@@ -177,7 +178,7 @@ class NewsManager
     }
 
     /** Searches news published between `dt_start` and `dt_end`. */
-    vector<News> NewsManager::searchDate(Datetime dt_start, Datetime dt_end) const
+    vector<News> searchDate(Datetime dt_start, Datetime dt_end) const
     {
       vector<News> res;
       for (auto it = news->begin(); it < news->end(); it++)

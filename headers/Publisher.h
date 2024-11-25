@@ -4,6 +4,7 @@
 #include <string>
 #include <ctime>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 struct Publisher
@@ -71,13 +72,13 @@ class PublisherManager
     };
 
     /** Returns constant pointer vector storing all `Publishers`. */
-    const vector<Publisher>* PublisherManager::getAllPublishers() const
+    const vector<Publisher>* getAllPublishers() const
     {
       return publishers;
     }
     
     /** Creates a new `Publisher`, then returns its index inside the `Publisher` vector.  */
-    int PublisherManager::createPublisher(string email, string password, string name, string about, string phone)
+    int createPublisher(string email, string password, string name, string about, string phone)
     {
       publishers->push_back(Publisher{ nextPublisherId, email, password, name, about, phone });
       nextPublisherId++;
@@ -86,7 +87,7 @@ class PublisherManager
     }
 
     /** Modifies data of a `Publisher` with specified `id`. */
-    void PublisherManager::editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newAbout = "", string newPhone = "")
+    void editPublisher(int id, string newEmail = "", string newPassword = "", string newName = "", string newAbout = "", string newPhone = "")
     {
       int index = searchPublisherId(id);
       Publisher* p = &(publishers->at(index));
@@ -104,14 +105,14 @@ class PublisherManager
     }
 
     /** Deletes a `Publisher` with specified `id`. */
-    void PublisherManager::deletePublisher(int id)
+    void deletePublisher(int id)
     {
       int index = searchPublisherId(id);
       publishers->erase(publishers->begin()+index);
     }
 
     /** Save `Publishers` to database. */
-    void PublisherManager::savePublishers() const
+    void savePublishers() const
     {
       ofstream outPub("database/publishers.txt");
 
@@ -126,7 +127,7 @@ class PublisherManager
     }
 
     /** Stores `Publisher` inside database and deletes DMA inside `Publisher` class. */
-    PublisherManager::~PublisherManager()
+    ~PublisherManager()
     {
       savePublishers();
       delete publishers;
@@ -134,7 +135,7 @@ class PublisherManager
     }
 
     /** Returns the index of a `Publisher` with specified `id`. */
-    int PublisherManager::searchPublisherId(int id) const
+    int searchPublisherId(int id) const
     { 
       int index = 0;
       for (auto it = publishers->begin(); it < publishers->end(); it++)
@@ -149,7 +150,7 @@ class PublisherManager
     }
 
     /** Returns the index of a `Publisher` based on given `email`. */
-    int PublisherManager::searchEmail(string email) const
+    int searchEmail(string email) const
     {
       int index = 0;
       for (auto it = publishers->begin(); it < publishers->end(); it++)
@@ -164,7 +165,7 @@ class PublisherManager
     }
 
     /** Searches names of `Publishers`, then return a constant vector. */
-    vector<Publisher> PublisherManager::searchName(string name) const
+    vector<Publisher> searchName(string name) const
     {
       vector<Publisher> res;
       for (auto it = publishers->begin(); it < publishers->end(); it++)
