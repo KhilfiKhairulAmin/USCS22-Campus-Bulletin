@@ -58,7 +58,7 @@ void editNews(){
 void deleteNews(){
 }
 
-/*--------------------------------MAIN MENU----------------------------*/
+/*----------------------------- MENU----------------------------*/
 int main ()
 {
 	cout<<"+++++++++++++++++++++INTEC CAMPUS BULLETIN+++++++++++++++++++++"<<endl;
@@ -75,7 +75,7 @@ int main ()
 	{
 		cout<<"\n\nWrite your news here: "<<endl;
 		getline (cin, news);
-		writeNews (news);
+		writeNews(news);
 	}
 	
 	if (option == 2)
@@ -86,7 +86,7 @@ int main ()
 	
 	if (option == 3)
 	{
-		editNews();
+		edi
 	}
 	
 	if (option == 4)

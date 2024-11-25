@@ -40,7 +40,7 @@ string Database::version = "0.0.1";
 #define SIGN_IN 2
 
 /** Publisher ID of current user */
-int PID = -1;
+int PID = 0;
 
 /** Current Menu number the user is interacting with */
 int MENU = 0;
@@ -52,60 +52,6 @@ const vector<Publisher>* publishers;
 const vector<News>* news;
 
 /*-----------------------------------------------------[ MAIN PROGRAM ]------------------------------------------------------------------*/
-
-void displayOptions(int selected) {
-    // Clear the line before displaying options
-    std::cout << "\033[2K\r"; 
-
-    // Display "Yes" in highlighted text if selected
-    if (selected == 0) {
-        std::cout << "\033[7m Yes \033[0m  No";
-    } else {
-        std::cout << " Yes  \033[7m No \033[0m";
-    }
-
-    std::cout.flush();  // Ensure the output is displayed immediately
-}
-
-void entryMenu()
-{
-    cout << "Do you want to Sign In?\n";
-    int selected = 0;
-    while (true) {
-        int key = _getch(); // Get a single character input
-
-        // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
-        if (key == 224 || key == 0) {
-            key = _getch();  // Get the actual key code after 224/0
-
-            if (key == 75) {  // Left arrow key
-                selected = 0;
-                displayOptions(selected);
-            } else if (key == 77) {  // Right arrow key
-                selected = 1;
-                displayOptions(selected);
-            }
-        } else if (key == 13) {  // Enter key to confirm selection
-            break;
-        }
-    }
-    if (selected == 0)
-        MENU = SIGN_UP;
-    else
-        MENU = SIGN_IN;
-}
-
-int main()
-{
-    while (true)
-    {
-        if (MENU == ENTRY)
-            entryMenu();
-        else if (MENU == SIGN_UP){}
-        else if (MENU == SIGN_IN){}
-        else {}
-    }
-}
 
 string toLowerCase(const string& str) {
     string lowerStr = str;
@@ -133,6 +79,7 @@ PublisherManager::PublisherManager()
     // Split by ^ (the delimiter)
     while (getline(ss, id, '^'))
     {
+
       fields.push_back(id);
     }
     
@@ -485,3 +432,40 @@ vector<array<int, 2>> Database::getPopularityRankings() const
 }
 
 Database::~Database() {};
+
+void entryMenu()
+{
+    int s = 0;
+    cout << "SIGN IN / UP";
+
+    cin >> s;
+
+    if (s == 0)
+        MENU = 1;
+    else
+        MENU = 2;
+}
+
+void mainMenu()
+{
+    Publisher p = publishers->at(PID);
+    cout << p.name;
+}
+
+int main()
+{
+    Database db = Database();
+    publishers = db.getAllPublishers();
+    
+    mainMenu();
+    db.deleteNews(0);
+    while (true)
+    {
+        if (MENU == ENTRY)
+            entryMenu();
+        else if (MENU == 1)
+            sign
+        else if (MENU == 2){}
+        else {}
+    }
+}
