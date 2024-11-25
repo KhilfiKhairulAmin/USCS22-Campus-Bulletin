@@ -11,6 +11,10 @@
  * 
 */
 
+// TODO: Create all function prototypes
+// TODO: Siapkan different parts of UI and flow
+// TODO: Dominate all the other groups by introducing some absurd feature (sound effects, image, data analytics)
+
 /*----------------------------------------------------[ HEADERS & INCLUDES ]------------------------------------------------------------*/
 
 #include "headers/Database.h"
@@ -24,20 +28,18 @@
 #include <algorithm>
 using namespace std;
 
-/*----------------------------------------------------[ FUNCTION PROTOTYPES ]------------------------------------------------------------*/
-
-int PublisherManager::totalPublishers = 0;
-int PublisherManager::nextPublisherId = 1;
-int NewsManager::totalNews = 0;
-int NewsManager::nextNewsId = 1;
-string Database::version = "0.0.1";
-
 /*-----------------------------------------------------[ GLOBAL VARIABLES ]--------------------------------------------------------------*/
 
 /** MENU numbers */
 #define ENTRY 0
 #define SIGN_UP 1
 #define SIGN_IN 2
+#define MAIN_MENU 3
+#define CREATE_NEWS 4
+#define EDIT_NEWS 5
+#define DELETE_NEWS 6
+#define EDIT_PROFILE 7
+#define CALENDAR 8
 
 /** Publisher ID of current user */
 int PID = 0;
@@ -50,6 +52,14 @@ const vector<Publisher>* publishers;
 
 /** Stores all news data */
 const vector<News>* news;
+
+/*----------------------------------------------------[ FUNCTION PROTOTYPES ]------------------------------------------------------------*/
+
+int PublisherManager::totalPublishers = 0;
+int PublisherManager::nextPublisherId = 1;
+int NewsManager::totalNews = 0;
+int NewsManager::nextNewsId = 1;
+string Database::version = "0.0.1";
 
 /*-----------------------------------------------------[ MAIN PROGRAM ]------------------------------------------------------------------*/
 
