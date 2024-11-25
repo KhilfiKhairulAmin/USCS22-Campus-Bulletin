@@ -65,7 +65,7 @@ struct Datetime: Date, Time
     Date d = getCurrentDate();
     Time t = getCurrentTime();
     
-    return Datetime{ d.year, d.month, d.day, d.dayName, t.hour, t.minute, t.second }; 
+    return Datetime dt{ d.year, d.month, d.day, d.dayName, t.hour, t.minute, t.second }; 
   }
 
   static Datetime sToDatetime(string datetimeString)
