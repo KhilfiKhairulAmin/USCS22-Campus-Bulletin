@@ -458,14 +458,4 @@ int main()
     publishers = db.getAllPublishers();
     
     mainMenu();
-    db.deleteNews(0);
-    while (true)
-    {
-        if (MENU == ENTRY)
-            entryMenu();
-        else if (MENU == 1)
-            sign
-        else if (MENU == 2){}
-        else {}
-    }
 }
