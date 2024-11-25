@@ -7,4 +7,4 @@ int main() {
     cout<<"Hai saya Rusy!"<<endl;
     cout << "tinte's here!!" << endl;
     return 0;
-}
+} 
