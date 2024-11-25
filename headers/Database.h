@@ -114,5 +114,10 @@ class Database: public NewsManager, public PublisherManager
     Database::~Database() {};
 };
 
+int PublisherManager::totalPublishers = 0;
+int PublisherManager::nextPublisherId = 1;
+int NewsManager::totalNews = 0;
+int NewsManager::nextNewsId = 1;
+string Database::version = "0.0.1";
 
 #endif
