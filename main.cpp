@@ -34,7 +34,7 @@ const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
 int PID = 0;   // Publisher ID of current user
-int MENU = 0;  // Current Menu number the user is interacting with
+int MENU = ENTRY;  // Current Menu number the user is interacting with
 
 void entryMenu(),     // Function prototypes for all menus
      signUp(),
@@ -55,7 +55,17 @@ int main()
   Database db = Database();
   publishers = db.getAllPublishers();
   loadSounds();
-  mainMenu();
+
+  clear();
+  while (true)
+  {
+    if (MENU == ENTRY)
+      entryMenu();
+    else if (MENU == SIGN_UP)
+      signUp();
+    else
+      break;
+  }
 }
 
 
@@ -64,61 +74,72 @@ int main()
 
 void entryMenu()
 {
-  vector<string> opts = { "Sign Up", "Sign In" };
+  vector<string> opts = { "Log In", "Sign Up" };
   int selected = 0;
   bool flag = true;
-  int key = 0;
-  while (true) {
-    while (flag)
+  int key = 72;
+  while (flag)
+  {
+    if (key == 72 || key == 80)
     {
-      if (key == 224 || key == 0)
+      clear();
+      sidebar(opts, selected);
+      setPercentage(10);
+      if (selected == 0)
       {
-        clear();
-        sidebar(opts, selected);
-        setCursor(10, 1);
-        if (selected == 0)
-        {
-          slowPrint("SIGN UP");
-        }
-        else
-        {
-          slowPrint("SIGN IN");
-        }
+        print("LOG IN", "1;33;40");
+        slowPrint("Sign in into your account");
       }
-
-      int key = _getch(); // Get a single character input
-
-      // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
-      if (key == 224 || key == 0)
+      else
       {
-        key = _getch();  // Get the actual key code after 224/0
-
-        if (key == 75 || key == 77)
-        {
-          selected = (selected+1) % 2;
-
-          if (selected == 0)
-            MENU = SIGN_UP;
-          else  
-            MENU = SIGN_IN;
-        }
+        print("SIGN UP", "1;33;40");
+        slowPrint("Register as a Publisher for INTEC Insider");
       }
-      else if (key == 13)
-      {
-        flag = false;
-      }
+      print("");
+      slowPrint("[ENTER]");
     }
 
+    int key = _getch(); // Get a single character input
+
+    // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
+    if (key == 224)
+    {
+      key = _getch();  // Get the actual key code after 224/0
+
+      if (key == 72 || key == 80)
+      {
+        selected = (selected+1) % 2;
+
+        if (selected == 0)
+          MENU = SIGN_IN;
+        else
+          MENU = SIGN_UP;
+      }
+    }
+    else if (key == 13)
+    {
+      flag = false;
+    }
+  }
     // if (MENU == SIGN_UP)
     //   signUp();
     // else
     //   signIn();
-  }
 }
 
-void mainMenu()
+// TODO: Input error handling
+// Input auto centralized + limit
+// Add sounds to all button press
+// Add more menu in main menu
+
+void signUp()
 {
-  clear();
-  entryMenu();
-  clear();
+  print("");
+  print("");
+  slowPrint("Enter your details as requested:");
+  print("Name:");
+  center(15);
+  string name;
+  getline(cin, name);
+  slowPrint("Your name is " + name);
 }

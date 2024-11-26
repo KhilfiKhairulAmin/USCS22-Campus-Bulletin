@@ -14,7 +14,7 @@ void loadSounds()
 void clickSound(int ms)
 {
   sf::Time duration = click.getDuration();
-  for (int i = 0; i < ms; i+=duration.asMilliseconds()+30)
+  for (int i = 0; i < ms; i+=duration.asMilliseconds()+50)
   {
     // Create a sound object
     sf::Sound sound;
@@ -23,7 +23,7 @@ void clickSound(int ms)
     // Play the sound
     sound.play();
 
-    sf::sleep(sf::milliseconds(duration.asMilliseconds()+30));
+    sf::sleep(sf::milliseconds(duration.asMilliseconds()+50));
   }
 }
 

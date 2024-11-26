@@ -87,22 +87,31 @@ void print(const char* msg, string color = "0")
   print(m, color);
 }
 
+void setPercentage(int r = 0, int c = 0)
+{
+  int x, y;
+  getMaxXY(x, y);
+  setCursor(x * r/100+1, y*c/100+1);
+}
+
 void sidebar(vector<string> options, int selected)
 {
   int x, y;
   getMaxXY(x, y);
   x--;
+  int length = y*20/100;
+  string space = string(length, ' ');
   int interval = x / options.size() - options.size();
   cout << "\n";
   for (int j = 0; j < interval / 2; j++)
   {
-    cout << "|                                           |\n";
+    cout << "|" << space << "|\n";
   }
 
   cout << "|    ";
   if (0 == selected)
     setColor(1, 33);
-  cout << options[0] << string(39-options[0].size(), ' ');
+  cout << options[0] << string(length-4-options[0].size(), ' ');
   resetColor();
   cout << "|\n";
 
@@ -110,20 +119,20 @@ void sidebar(vector<string> options, int selected)
   {
     for (int j = 0; j < interval; j++)
     {
-      cout << "|                                           |\n";
+      cout << "|" << space << "|\n";
       ROW++;
     }
     cout << "|    ";
     if (i == selected)
       setColor(1, 33);
-    cout << options[i] << string(39-options[i].size(), ' ');
+    cout << options[i] << string(length-4-options[i].size(), ' ');
     resetColor();
     cout << "|\n";
   }
   
   for (int j = 0; j < interval / 2; j++)
   {
-    cout << "|                                           |\n";
+    cout << "|" << space << "|\n";
   }
 }
 
@@ -134,6 +143,7 @@ void rowSet(int set)
 
 int getRow()
 {
+  int x, y;
   return ROW;
 }
 
