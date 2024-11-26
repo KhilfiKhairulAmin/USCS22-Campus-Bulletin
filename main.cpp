@@ -30,6 +30,7 @@ using namespace std;
 /*--------------------------------[ GLOBAL VARIABLES & FUNCTION PROTOTYPES ]---------------------------------------------------*/
 
 
+Database db;
 const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
@@ -52,8 +53,9 @@ void entryMenu(),     // Function prototypes for all menus
 
 int main()
 {
-  Database db = Database();
+  db = Database();
   publishers = db.getAllPublishers();
+  news = db.getAllNews();
   loadSounds();
 
   clear();
@@ -63,8 +65,9 @@ int main()
       entryMenu();
     else if (MENU == SIGN_UP)
       signUp();
-    else
-      break;
+    else if (MENU == SIGN_IN)
+      signIn();
+    else if (MENU == )
   }
 }
 
@@ -137,9 +140,32 @@ void signUp()
   print("");
   print("");
   slowPrint("Enter your details as requested:");
-  print("Name:");
+
+  string email, pass, rPass, name, about, phone;
+
+  print("Email:");
   center(15);
-  string name;
-  getline(cin, name);
-  slowPrint("Your name is " + name);
+  getline(cin, email);
+  print("Password:");
+  center(15);
+  getline(cin, pass);
+  print("Repeat Password:");
+  center(15);
+  getline(cin, rPass);
+  print("About:");
+  center(15);
+  getline(cin, about);
+  print("Phone:");
+  center(15);
+  getline(cin, phone);
+
+  db.createPublisher(email, pass, name, about, phone);
+
+  MENU = MAIN_MENU;
+}
+
+void mainMenu()
+{
+  clear();
+  print("MAIN MENU");
 }
