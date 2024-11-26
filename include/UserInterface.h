@@ -7,6 +7,8 @@
 #include <thread>
 #include <cstdlib>
 #include <stdlib.h>
+#include <csignal>                  // For handling special input
+#include <conio.h>                  // For handling custom input (Windows only; Compiler G++ v11.0.0+)
 #define DEFAULT_INTERVAL 40
 using namespace std;
 int ROW = 1;
@@ -103,7 +105,7 @@ void sidebar(vector<string> options, int selected)
   string space = string(length, ' ');
   int interval = x / options.size() - options.size();
   cout << "\n";
-  for (int j = 0; j < interval / 2; j++)
+  for (int j = 0; j < interval / 2 ; j++)
   {
     cout << "|" << space << "|\n";
   }
@@ -145,6 +147,28 @@ int getRow()
 {
   int x, y;
   return ROW;
+}
+
+// TODO: Input error handling
+// Input auto centralized + limit
+// Add sounds to all button press
+// Add more menu in main menu
+
+string inputCenter(int maxSize, int setCursor)
+{
+  string s = "";
+  setCursor(1, 1);
+  while (true)
+  {
+    int key = _getch();
+
+    if (key == 13)
+      return s;
+
+    s.push_back(char(key));
+
+
+  }
 }
 
 #endif

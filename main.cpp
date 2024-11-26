@@ -1,8 +1,9 @@
 /*------------------------------------------------[ CREDITS ]-----------------------------------------------------------------*/
 
-// TODO: Siapkan different parts of UI and flow
-// TODO: Dominate all the other groups by introducing some absurd feature (sound effects, image, data analytics)
-// TODO: configuration, calendar view, link opener, text-to-speech, system information
+// TODO Siapkan different parts of UI and flow
+// TODO Dominate all the other groups by introducing some absurd feature (sound effects, image, data analytics)
+// TODO configuration, calendar view, link opener, text-to-speech, system information
+// TODO 
 
 /*-------------------------------------------[ HEADERS & INCLUDES ]------------------------------------------------------------*/
 
@@ -127,11 +128,6 @@ void entryMenu()
     //   signIn();
 }
 
-// TODO: Input error handling
-// Input auto centralized + limit
-// Add sounds to all button press
-// Add more menu in main menu
-
 void signUp()
 {
   print("");
@@ -139,7 +135,7 @@ void signUp()
   slowPrint("Enter your details as requested:");
   print("Name:");
   center(15);
-  string name;
-  getline(cin, name);
+  string email, password, repeatPassword, name, about, phone;
+  inputCenter(10);
   slowPrint("Your name is " + name);
 }
