@@ -9,10 +9,12 @@
 
 #include "include/Database.h"       // For connecting to the database of the application
 #include "include/UserInterface.h"  // For reusing same UI components multiple times
+#include "include/Calendar.h"       // Include calendar function to the main file
 #include <iostream>                 // For handling input and output
 #include <iomanip>                  // For formatting output
 #include <csignal>                  // For handling special input
 #include <conio.h>                  // For handling custom input (Windows only; Compiler G++ v11.0.0+)
+
 
 #define ENTRY 0         // MENU NUMBER 0
 #define SIGN_UP 1       // MENU NUMBER 1
@@ -43,8 +45,7 @@ void entryMenu(),     // Function prototypes for all menus
      createNews(),
      editNews(),
      deleteNews(),
-     editProfile(),
-     calendar();
+     editProfile();
 
 
 /*---------------------------------------------[ MAIN PROGRAM ]----------------------------------------------------------------*/
@@ -55,7 +56,8 @@ int main()
   Database db = Database();
   publishers = db.getAllPublishers();
   
-  mainMenu();
+  calendar();
+
 }
 
 
