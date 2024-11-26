@@ -2,7 +2,7 @@
 
 // TODO: Siapkan different parts of UI and flow
 // TODO: Dominate all the other groups by introducing some absurd feature (sound effects, image, data analytics)
-// TODO: Add text sound effect, configuration, calendar view, link opener, text-to-speech, system information
+// TODO: configuration, calendar view, link opener, text-to-speech, system information
 
 /*-------------------------------------------[ HEADERS & INCLUDES ]------------------------------------------------------------*/
 
@@ -64,20 +64,61 @@ int main()
 
 void entryMenu()
 {
-  int s = 0;
-  print("SIGN IN / UP");
-  slowPrint("DNWUFIUBWIIBIUFBWIUBIUBFWUFWUBFIWBIWBFI");
+  vector<string> opts = { "Sign Up", "Sign In" };
+  int selected = 0;
+  bool flag = true;
+  int key = 0;
+  while (true) {
+    while (flag)
+    {
+      if (key == 224 || key == 0)
+      {
+        clear();
+        sidebar(opts, selected);
+        setCursor(10, 1);
+        if (selected == 0)
+        {
+          slowPrint("SIGN UP");
+        }
+        else
+        {
+          slowPrint("SIGN IN");
+        }
+      }
 
-  cin >> s;
+      int key = _getch(); // Get a single character input
 
-  if (s == 0)
-    MENU = 1;
-  else
-    MENU = 2;
+      // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
+      if (key == 224 || key == 0)
+      {
+        key = _getch();  // Get the actual key code after 224/0
+
+        if (key == 75 || key == 77)
+        {
+          selected = (selected+1) % 2;
+
+          if (selected == 0)
+            MENU = SIGN_UP;
+          else  
+            MENU = SIGN_IN;
+        }
+      }
+      else if (key == 13)
+      {
+        flag = false;
+      }
+    }
+
+    // if (MENU == SIGN_UP)
+    //   signUp();
+    // else
+    //   signIn();
+  }
 }
 
 void mainMenu()
 {
   clear();
   entryMenu();
+  clear();
 }
