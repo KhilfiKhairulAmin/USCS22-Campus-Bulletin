@@ -83,6 +83,7 @@ class PublisherManager
       publishers->push_back(Publisher{ nextPublisherId, email, password, name, about, phone });
       nextPublisherId++;
       totalPublishers++;
+      savePublishers();
       return totalPublishers-1;
     }
 
@@ -102,6 +103,7 @@ class PublisherManager
         p->about = newAbout;
       if (newPhone != "")
         p->phone = newPhone;
+      savePublishers();
     }
 
     /** Deletes a `Publisher` with specified `id`. */
@@ -109,6 +111,7 @@ class PublisherManager
     {
       int index = searchPublisherId(id);
       publishers->erase(publishers->begin()+index);
+      savePublishers();
     }
 
     /** Save `Publishers` to database. */

@@ -59,6 +59,7 @@ class NewsManager
       });
       totalNews++;
       nextNewsId++;
+      saveNews();
       return totalNews-1;
     }
 
@@ -72,6 +73,7 @@ class NewsManager
         n->title = newTitle;
       if (newContent != "")
         n->content = newContent;
+      saveNews();
     }
 
     /** Deletes a `News` with specified `id`. */
@@ -80,6 +82,7 @@ class NewsManager
       int index = searchNewsId(id);
       news->erase(news->begin()+index);
       totalNews--;
+      saveNews();
     }
 
     /** Loads `News` from database. */
