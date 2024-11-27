@@ -120,9 +120,8 @@ void sidebar(vector<string> options, int selected)
 
   cout << "|   ";
   if (0 == selected)
-    setColor(1, 33);
-  cout << " " << options[0] << " ";
-  resetColor();
+    cout << On_IGreen;
+  cout << " " << options[0] << " " << Color_Off;
   cout << string(length-5-options[0].size(), ' ') << "|\n";
 
   for (int i = 1; i < options.size(); i++)
@@ -134,9 +133,9 @@ void sidebar(vector<string> options, int selected)
     }
     cout << "|   ";
     if (i == selected)
-      setColor(1, 33);
-    cout << " " << options[i] << " ";
-    resetColor();
+      cout << On_IGreen;
+    cout << " " << options[i] << " " << Color_Off;
+
     cout << string(length-5-options[i].size(), ' ')<< "|\n";
   }
   
@@ -178,7 +177,7 @@ bool isAllowedCharacter(int key) {
     return false; // Reject all other keys
 }
 
-string inputText(int maxSize, int minSize = 1, string def = "", string col = Cyan)
+string inputText(int maxSize, int minSize = 1, string def = "", string col = On_ICyan)
 {
   cout << col;
   string s = def;
@@ -266,7 +265,7 @@ string inputText(int maxSize, int minSize = 1, string def = "", string col = Cya
 //   return s;
 // }
 
-string inputEmail(int maxSize, int minSize = 1, string def = "", string col = Cyan)
+string inputEmail(int maxSize, int minSize = 1, string def = "", string col = On_ICyan)
 {
   cout << col;
   string s = def;
@@ -308,7 +307,7 @@ string inputEmail(int maxSize, int minSize = 1, string def = "", string col = Cy
   return s;
 }
 
-string inputPhone(int maxSize, int minSize = 1, string def = "", string col = Cyan)
+string inputPhone(int maxSize, int minSize = 1, string def = "", string col = On_ICyan)
 {
   cout << col;
   string s = def;
@@ -350,7 +349,7 @@ string inputPhone(int maxSize, int minSize = 1, string def = "", string col = Cy
   return s;
 }
 
-int inputNumber(int maxSize, int minSize = 1, string def = "", string col = Cyan)
+int inputNumber(int maxSize, int minSize = 1, string def = "", string col = On_ICyan)
 {
   cout << col;
   string s = def;
@@ -427,8 +426,16 @@ string inputPassword(int maxSize, int minSize = 1, string def = "")
   }
   center(s.length());
   ROW--;
+  cout << flush << string(s.length(), '*');
   ROW += 2;
   return s;
+}
+
+void fill(char c, string color)
+{
+  int x, y;
+  getMaxXY(x, y);
+  print(string(y, c), color);
 }
 
 #endif

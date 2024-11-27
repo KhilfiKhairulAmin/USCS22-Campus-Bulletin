@@ -39,7 +39,7 @@ const vector<News>* news;             // Stores all news data
 
 Publisher this_pub;
 int PID = 0;   // Publisher ID of current user
-int MENU = ENTRY;  // Current Menu number the user is interacting with
+int MENU = MAIN_MENU;  // Current Menu number the user is interacting with
 
 void entryMenu(),     // Function prototypes for all menus
      signUp(),
@@ -84,7 +84,7 @@ int main()
 
 void entryMenu()
 {
-  vector<string> opts = { "Sign In", "Sign Up" };
+  vector<string> opts = { "Sign In", "Sign Up", "Guest" };
   int selected = 0;
   MENU = SIGN_IN;
   bool flag = true;
@@ -100,13 +100,13 @@ void entryMenu()
       setPercentage(20);
       if (selected == 0)
       {
-        slowPrint("SIGN IN");
+        slowPrint("SIGN IN", 40, UWhite);
         cout << endl;
         slowPrint("Sign in to your account", 40);
       }
       else
       {
-        slowPrint("SIGN UP");
+        slowPrint("SIGN UP", 40, UWhite);
         slowPrint("Register as a publisher");
       }
       print("\n");
@@ -222,36 +222,39 @@ void mainMenu() {
     clear();
 
     // Display the title with a dramatic animation
-    print("========================================\n", Purple);
-    print("        WELCOME TO THE NEWS HUB         \n", Yellow);
-    print("========================================\n", Purple);
-
+    print("");
+    fill('=', Purple);
+    print("");
+    print("WELCOME TO THE NEWS HUB", Yellow);
+    print("");
+    fill('=', Purple);
+    print("");
     // Provide an overview of options
-    cout << Cyan << "*************************" ;
-    cout << Yellow<< "\nMAIN MENU OPTIONS:\n";
-    cout << Cyan<<"*************************" << endl ;
-    cout << Yellow << "1. Create News\n";
-    cout << "2. Edit News\n";
-    cout << "3. Delete News\n";
-    cout << "4. Edit Profile\n";
-    cout << "5. View Calendar\n";
-    cout << "6. Read News\n";
-    cout << "7. Sign Out\n";
+    // print("*************************", Cyan);
+    slowPrint("MAIN MENU OPTIONS:", 40, BGreen);
+    // print("*************************", Cyan);
+    print("");
+    print("1. Create News");
+    print("2. Edit News");
+    print("3. Delete News");
+    print("4. Edit Profile");
+    print("5. View Calendar");
+    print("6. Read News");
+    print("7. Sign Out");
+
     // TODO Create news, edit news, delete news, edit profile, view calendar, 
 
     // Simulate sound effect for user input readiness
-    cout << "\n*Ding* Please select an option: ";
+    print("\a");
+    slowPrint("Please select an option: ", 40, BIWhite);
 
     // Get the user's choice
-    int choice;
-    cin >> choice;
-    cin.ignore();
+    int choice = inputNumber(1, 1, "", On_IYellow);
 
     clear();
 
-    string line;
-
     // Use a switch-case for menu navigation
+    string line;
     switch (choice) {
       case 1:
           cout << "\nRedirecting to Create News...\n";
@@ -372,17 +375,21 @@ void deleteNews()
 }
 
 void readNews() {
-    for (auto it = news->rbegin(); it != news->rend(); it++) {
-        cout << Purple<<"\n\n+---------------------------------------------------------------------+" << endl;
-        cout << Blue<<"| ID: " << it->id << endl;
-        cout << "| Title: " << it->title << endl;
-        cout << White<<"+---------------------------------------------------------------------+" << endl;
-        cout << Blue<<"| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
-        // Uncomment if you want to display the content
-        cout << "| Content: " << it->content << endl;
-        cout << Purple<<"+---------------------------------------------------------------------+" << endl;
-        cout << endl;
-}
+
+
+
+  for (auto it = news->begin(); it != news->end(); it++)
+  {
+    cout << Purple<<"\n\n+---------------------------------------------------------------------+" << endl;
+    cout << Blue<<"| ID: " << it->id << endl;
+    cout << "| Title: " << it->title << endl;
+    cout << White<<"+---------------------------------------------------------------------+" << endl;
+    cout << Blue<<"| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
+    // Uncomment if you want to display the content
+    cout << "| Content: " << it->content << endl;
+    cout << Purple<<"+---------------------------------------------------------------------+" << endl;
+    cout << endl;
+  }
 }
 
 void editProfile()
