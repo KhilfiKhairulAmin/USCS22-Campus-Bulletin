@@ -34,8 +34,8 @@ using namespace std;
 
 
 Database* db;
-const vector<Publisher>* publishers;  // Stores all publishers data
-const vector<News>* news;             // Stores all news data
+vector<Publisher>* publishers;  // Stores all publishers data
+vector<News>* news;             // Stores all news data
 
 Publisher this_pub;
 int PID = 0;   // Publisher ID of current user
@@ -374,22 +374,167 @@ void deleteNews()
   db->deleteNews(id);
 }
 
-void readNews() {
+void readNews()
+{
+  vector<string> opts = { "Recent", "Search", "Filter" };
+  int selected = 0;
+  bool flag = true;
+  int key = 72;
+  while (flag)
+    {
+    if (key == 72 || key == 80)
+    {
+      clear();
+      thread th(clickButtonSound);
+      sidebar2(opts, selected);
+      th.join();
+    }
 
+    int key = _getch(); // Get a single character input
 
+    // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
+    if (key == 224 || key == 0)
+    {
+      key = _getch();  // Get the actual key code after 224/0
 
-  for (auto it = news->begin(); it != news->end(); it++)
-  {
-    cout << Purple<<"\n\n+---------------------------------------------------------------------+" << endl;
-    cout << Blue<<"| ID: " << it->id << endl;
-    cout << "| Title: " << it->title << endl;
-    cout << White<<"+---------------------------------------------------------------------+" << endl;
-    cout << Blue<<"| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
-    // Uncomment if you want to display the content
-    cout << "| Content: " << it->content << endl;
-    cout << Purple<<"+---------------------------------------------------------------------+" << endl;
-    cout << endl;
+      if (key == 72)
+        selected = (selected + 2) % opts.size();
+      else if (key == 80)
+        selected = (selected+1) % opts.size();
+    }
+    else if (key == 13)
+    {
+      flag = false;
+    }
   }
+
+  int x, y;
+  getMaxXY(x, y);
+  int length = y*20/100;
+  string space = string(length, ' ');
+
+  vector<News> ns;
+  if (selected == 0)
+    ns = *db->getAllNews();
+  else if (selected == 1)
+  {
+    string search;
+    cout << space + "Search: " << On_IYellow;
+    getline(cin, search);
+    cout << Color_Off;
+    ns = db->searchTitle(search);
+  }
+  else
+  {
+    cout << space + "Start Date (D/M/Y): " << On_IYellow;
+    string inD;
+    getline(cin, inD);
+    stringstream ss(inD);
+
+    int d, m, y;
+    getline(ss, inD, '/');
+    d = atoi(inD.c_str());
+    getline(ss, inD, '/');
+    m = atoi(inD.c_str());
+    getline(ss, inD, '/');
+    y = atoi(inD.c_str());
+
+    cout << Color_Off;
+
+    cout << space + "End Date (D/M/Y): " << On_IYellow;
+    getline(cin, inD);
+    stringstream ss2(inD);
+
+    int d2, m2, y2;
+    getline(ss2, inD, '/');
+    d2 = atoi(inD.c_str());
+    getline(ss2, inD, '/');
+    m2 = atoi(inD.c_str());
+    getline(ss2, inD, '/');
+    y2 = atoi(inD.c_str());
+
+    cout << Color_Off;
+
+    ns = db->searchDate(Datetime{ y, m, d }, Datetime{ y2, m2, d2 });
+  }
+
+  clear();
+  for (auto it = ns.begin(); it != ns.end(); it++)
+  {
+    cout << space << Purple<<"+---------------------------------------------------------------------+" << endl;
+    cout << space << Blue<<"| ID: " << it->id << endl;
+    cout << space << "| Title: " << it->title << endl;
+    cout << space << White<<"+---------------------------------------------------------------------+" << endl;
+    cout << space << Blue<<"| Published By: " << publishers->at(db->searchPublisherId(it->publisherId)).name << endl;
+    cout << space << Blue<<"| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
+    // Uncomment if you want to display the content
+    // cout << "| Content: " << it->content << endl;
+    cout << space << Purple<<"+---------------------------------------------------------------------+" << endl;
+    cout << space << endl;
+  }
+
+  cout << endl << space << On_ICyan << "Press space to continue..." << Color_Off;
+  string i;
+  getline(cin, i);
+
+  clear();
+
+  int id, index;
+  print("");
+  while (true)
+  {
+    slowPrint("Enter News ID to read (enter -1 to exit):", 40, UWhite);
+    id = inputNumber(5, 0);
+    try
+    {
+      index = db->searchNewsId(id);
+      break;
+    }
+    catch(const char* c)
+    {
+      ROW -= 3;
+      center(to_string(id).length());
+      print(string(to_string(id).length(), ' '));
+      ROW -= 2;
+      center(9);
+      print(string(7, ' '));
+      ROW -= 3;
+      print(c, Red);
+      continue;
+    }    
+  }
+  clear();
+
+  News n = news->at(index);
+
+  slowPrint(n.title, 80, UYellow);
+  print("");
+  slowPrint("Published By: " + publishers->at(db->searchPublisherId(n.publisherId)).name, 40, Cyan);
+  slowPrint("Date Published:" + Datetime::datetimeToS(n.createdAt), 40, Cyan);
+  slowPrint("Likes (" + to_string(n.numOfLikes) + ")", 40, On_IGreen);
+  slowPrint("Dislikes (" + to_string(n.numOfDislikes) + ")", 40, On_IRed);
+  print("");
+  print("");
+  stringstream ss(n.content);
+  string line;
+  // getline(ss, line, '\n');
+  // slowPrint(line, 0);
+  while(getline(ss, line, '\n'))
+  {
+    slowPrint(line, 0);
+  }
+  print("");
+  print("[END OF NEWS]");
+  string itext = inputText(0, 0, "");
+
+  slowPrint("Do you like or dislike this news? [Y/n]", 40, Yellow);
+
+  string res = inputText(1, 0, "", On_IYellow);
+
+  if (res == "N" || res == "n")
+    db->dislike(id);
+  else
+    db->like(id);
 }
 
 void editProfile()

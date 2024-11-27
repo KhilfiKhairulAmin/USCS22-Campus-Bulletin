@@ -438,4 +438,51 @@ void fill(char c, string color)
   print(string(y, c), color);
 }
 
+void sidebar2(vector<string> options, int selected)
+{
+  int x, y;
+  getMaxXY(x, y);
+  x--;
+  int length = y*20/100;
+  string space = string(length, ' ');
+  int interval = (x-5) / (options.size()+1);
+  cout << "+" << string(length, '-') << "+\n";
+  cout << "|" << space << "|\n";
+  cout << "|   You are    " << string(length-14, ' ') << "|\n";
+  cout << BYellow << "|    READING NEWS " << string(length-17, ' ') << Color_Off << "|\n";
+  cout << "|" << space << "|\n";
+  cout << "+" << string(length, '-') << "+\n";
+  for (int j = 0; j < interval - 1; j++)
+  {
+    cout << "|" << space << "|\n";
+  }
+
+  cout << "|   ";
+  if (0 == selected)
+    cout << On_IGreen;
+  cout << " " << options[0] << " " << Color_Off;
+  cout << string(length-5-options[0].size(), ' ') << "|\n";
+
+  for (int i = 1; i < options.size(); i++)
+  {
+    for (int j = 0; j < interval - 1; j++)
+    {
+      cout << "|" << space << "|\n";
+      ROW++;
+    }
+    cout << "|   ";
+    if (i == selected)
+      cout << On_IGreen;
+    cout << " " << options[i] << " " << Color_Off;
+
+    cout << string(length-5-options[i].size(), ' ')<< "|\n";
+  }
+  
+  for (int j = 0; j < interval - 1; j++)
+  {
+    cout << "|" << space << "|\n";
+  }
+  cout << "+" << string(length, '-') << "+\n";
+}
+
 #endif
