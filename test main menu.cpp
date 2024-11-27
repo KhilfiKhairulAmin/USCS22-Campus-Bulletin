@@ -24,10 +24,11 @@ int main()
 	News info;
 	for (auto it = news->rbegin(); it != news->rend(); it++)
 	{
-		getPublisher (info.publisherId);
-		cout<<info.publishedAt<<endl;
-		cout<<"\t"<<info.title<<endl;
-		cout<<info.content<<endl;
+		const News &newsItem = *it;
+		getPublisher (newsItem.publisherId);
+		cout<<newsItem.publishedAt<<endl;
+		cout<<"\t"<<newsItem.title<<endl;
+		cout<<newsItem.content<<endl;
 	}
 
 	return 0;
