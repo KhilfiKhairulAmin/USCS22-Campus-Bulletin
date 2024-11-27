@@ -256,48 +256,31 @@ void mainMenu() {
     string line;
     switch (choice) {
       case 1:
-          cout << "\nRedirecting to Create News...\n";
-          slowPrint("Loading...\n");
           createNews(); // Calls the Create News function
           break;
       case 2:
-          // cout << "\nRedirecting to Edit News...\n";
-          // slowPrint("Loading...\n");
           editNews(); // Calls the Edit News function
           break;
       case 3:
-          // cout << "\nRedirecting to Delete News...\n";
-          // slowPrint("Loading...\n");
           deleteNews(); // Calls the Delete News function
           break;
       case 4:
-          // cout << "\nRedirecting to Edit Profile...\n";
-          // slowPrint("Loading...\n");
           getline(cin, line);
           editProfile(); // Calls the Edit Profile function
           break;
       case 5:
-          // cout << "\nOpening Calendar...\n";
-          // slowPrint("Loading...\n");
           calendar(); // Calls the Calendar function
           getline(cin, line);
           break;
       case 6:
-          // cout << "\nSigning Out...\n";
-          // slowPrint("Goodbye!\n");
           readNews();
           getline(cin, line);
           break;
-          // MENU = ENTRY; // Reset to the entry menu
-          // return;       // Exit the menu loop
       case 7:
-          cout << "\nSigning Out...\n";
-          slowPrint("Goodbye!\n");
+          slowPrint("Goodbye!", 500);
           MENU = ENTRY; // Reset to the entry menu
           return;       // Exit the menu loop
       default:
-          cout << "\nInvalid choice! Please try again.\n";
-          slowPrint("Returning to menu...\n");
           break;
     }
   }
@@ -306,6 +289,8 @@ void mainMenu() {
 void createNews()
 {
   string title, content;
+  vector<string> o = { "Create News" };
+  sidebar4(o, 0);
   slowPrint("Title:");
   title = inputText(50, 3, "", Yellow);
 
@@ -645,18 +630,55 @@ void readNews()
 
 void editProfile()
 {
-  clear();
-  string nName, nAbout, nPhone;
-  print("EDIT PROFILE");
-  slowPrint("Organization Name: ");
-  nName = inputText(20, 3, this_pub.name);
-  slowPrint("Organization About: ");
-  nAbout = inputText(20, 3, this_pub.about);
-  slowPrint("Phone Number: ");
-  nPhone = inputText(20, 3, this_pub.phone);
+  vector<string> opts = { "Views", "Update" };
+  int selected = 0;
+  bool flag = true;
+  int key = 72;
+  while (flag)
+    {
+    if (key == 72 || key == 80)
+    {
+      clear();
+      thread th(clickButtonSound);
+      sidebar3(opts, selected);
+      th.join();
+    }
 
-  db->editPublisher(this_pub.id, this_pub.email, this_pub.password, nName, nAbout, nPhone);
-  this_pub = publishers->at(PID);
+    int key = _getch(); // Get a single character input
+
+    // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
+    if (key == 224 || key == 0)
+    {
+      key = _getch();  // Get the actual key code after 224/0
+
+      if (key == 72)
+        selected = (selected + 2) % opts.size();
+      else if (key == 80)
+        selected = (selected+1) % opts.size();
+    }
+    else if (key == 13)
+    {
+      flag = false;
+    }
+  }
+  if (selected == 0)
+  {
+    
+  }
+  else if (selected == 1)
+  {
+    string nName, nAbout, nPhone;
+    print("EDIT PROFILE");
+    slowPrint("Organization Name: ");
+    nName = inputText(20, 3, this_pub.name);
+    slowPrint("Organization About: ");
+    nAbout = inputText(20, 3, this_pub.about);
+    slowPrint("Phone Number: ");
+    nPhone = inputText(20, 3, this_pub.phone);
+
+    db->editPublisher(this_pub.id, this_pub.email, this_pub.password, nName, nAbout, nPhone);
+    this_pub = publishers->at(PID);
+  }
 }
 
 void editNews()
