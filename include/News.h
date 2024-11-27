@@ -46,6 +46,7 @@ class NewsManager
     int createNews(int publisherId, string title, string content)
     {
       Datetime now = Datetime::getCurrentDatetime();
+      cout << Datetime::datetimeToS(now);
       news->push_back(News {
         nextNewsId,
         publisherId,
