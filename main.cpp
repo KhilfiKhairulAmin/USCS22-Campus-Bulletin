@@ -371,17 +371,17 @@ void readNews()
 void editProfile()
 {
   clear();
-  Publisher p = publishers->at(PID);
   string nName, nAbout, nPhone;
   print("EDIT PROFILE");
   slowPrint("Organization Name: ");
-  nName = inputText(20, 3, p.name);
+  nName = inputText(20, 3, this_pub.name);
   slowPrint("Organization Name: ");
-  nAbout = inputText(20, 3, p.about);
+  nAbout = inputText(20, 3, this_pub.about);
   slowPrint(": ");
-  nPhone = inputText(20, 3, p.phone);
+  nPhone = inputText(20, 3, this_pub.phone);
 
-  db->editPublisher(p.id, p.email, p.password, nName, nAbout, nPhone);
+  db->editPublisher(this_pub.id, this_pub.email, this_pub.password, nName, nAbout, nPhone);
+  this_pub = publishers->at(PID);
 }
 
 void editNews()

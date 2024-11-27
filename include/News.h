@@ -148,8 +148,8 @@ class NewsManager
       for (auto it = news->begin(); it < news->end(); it++)
       {
         for (int i = 0; i < it->content.size(); i++)
-          if (it->content[i] == '$')
-            it->content[i] = '\n';
+          if (it->content[i] == '\n')
+            it->content[i] = '$';
         outNews << it->id << "^" << it->publisherId << "^" << Datetime::datetimeToS(it->createdAt) << "^" << Datetime::datetimeToS(it->editedAt) << "^" << Datetime::datetimeToS(it->publishedAt) << "^" << it->title << "^" << it->content << "^" << it->numOfLikes << "^" << it->numOfDislikes << "^" << it->isPublished << "\n";
       }
     }
