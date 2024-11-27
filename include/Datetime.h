@@ -91,7 +91,7 @@ struct Datetime: Date, Time
 
   static string datetimeToS(Datetime dt)
   {
-    return to_string(dt.day) + "/" + to_string(dt.month) + "/" + to_string(dt.year) + "/" + to_string(dt.hour) + "/" + to_string(dt.minute) + "/" + to_string(dt.second);
+    return to_string(dt.day) + "/" + to_string(dt.month) + "/" + to_string(dt.year);
   }
 
   bool operator>=(Date dt)
