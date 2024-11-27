@@ -4,9 +4,11 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cstdlib>
 
 void calendar() 
 {
+    system("clear");
     using namespace std;
 
     const int daysInWeek = 7;
