@@ -1,9 +1,75 @@
-id^publisherId^createdAt^editedAt^publishedAt^title^content^numOfLikes^numOfDislikes^isPublished
-3^1^23/11/2024/21/8/0^23/11/2024/21/8/45^0/0/0/0/0/0^Good Morning^Third content entry^12^3^1
-4^1^23/11/2024/21/9/10^23/11/2024/21/9/30^0/0/0/0/0/0^Breaking News^Fourth content entry^24^8^0
-5^2^2/11/2024/21/9/50^23/11/2024/21/10/15^0/0/0/0/0/0^Daily Update^Fifth content here^45^15^1
-6^3^2/11/2024/21/10/25^23/11/2024/21/10/50^0/0/0/0/0/0^Lazy String Search^Learn about lazy searching^30^5^0
-7^4^2/11/2024/21/11/5^23/11/2024/21/11/30^0/0/0/0/0/0^C++ Topics^Discussing C++ tips^75^10^1
-8^5^23/11/2024/21/11/45^23/11/2024/21/12/5^0/0/0/0/0/0^Tech Trends^Upcoming technologies to explore^50^12^1
-9^2^23/12/2024/21/12/30^23/11/2024/21/12/55^0/0/0/0/0/0^Event Recap^Summary of the latest event^20^2^0
-10^3^23/11/2023/21/13/10^23/11/2024/21/13/40^0/0/0/0/0/0^AI Basics^Getting started with AI^33^7^1
+#include "include/Database.h"       // For connecting to the database of the application
+#include "include/UserInterface.h"  // For reusing same UI components multiple times
+#include <iostream>                 // For handling input and output
+#include <iomanip>                  // For formatting output
+#include <csignal>                  // For handling special input
+#include <conio.h>                  // For handling custom input (Windows only; Compiler G++ v11.0.0+)
+
+#define ENTRY 0         // MENU NUMBER 0
+#define SIGN_UP 1       // MENU NUMBER 1
+#define SIGN_IN 2       // MENU NUMBER 2
+#define MAIN_MENU 3     // MENU NUMBER 3
+#define CREATE_NEWS 4   // MENU NUMBER 4
+#define EDIT_NEWS 5     // MENU NUMBER 5
+#define DELETE_NEWS 6   // MENU NUMBER 6
+#define EDIT_PROFILE 7  // MENU NUMBER 7
+#define CALENDAR 8      // MENU NUMBER 8
+
+using namespace std;
+
+
+/*--------------------------------[ GLOBAL VARIABLES & FUNCTION PROTOTYPES ]---------------------------------------------------*/
+
+
+const vector<Publisher>* publishers;  // Stores all publishers data
+const vector<News>* news;             // Stores all news data
+
+int PID = 0;   // Publisher ID of current user
+int MENU = 0;  // Current Menu number the user is interacting with
+
+void entryMenu(),     // Function prototypes for all menus
+     signUp(),
+     signIn(),
+     mainMenu(),
+     createNews(),
+     editNews(),
+     deleteNews(),
+     editProfile(),
+     calendar();
+
+
+/*---------------------------------------------[ MAIN PROGRAM ]----------------------------------------------------------------*/
+
+
+int main()
+{
+  Database db = Database();
+  publishers = db.getAllPublishers();
+  
+  mainMenu();
+}
+
+
+/*----------------------------------------[ FUNCTION DEFINITIONS ]-------------------------------------------------------------*/
+
+
+void entryMenu()
+{
+  int s = 0;
+  print("SIGN IN / UP");
+  slowPrint("DNWUFIUBWIIBIUFBWIUBIUBFWUFWUBFIWBIWBFI");
+
+  cin >> s;
+
+  if (s == 0)
+    MENU = 1;
+  else
+    MENU = 2;
+}
+
+void mainMenu()
+{
+  clear();
+  entryMenu();
+}
+
