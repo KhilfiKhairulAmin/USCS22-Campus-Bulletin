@@ -46,6 +46,7 @@ void entryMenu(),     // Function prototypes for all menus
      editNews(),
      deleteNews(),
      editProfile(),
+     readNews(),
      calendar();
 
 
@@ -211,11 +212,77 @@ void signIn()
   MENU = MAIN_MENU;
 }
 
-void mainMenu()
-{
-  clear();
-  while(true)
-  MENU = -1;
+void mainMenu() {
+  while (true) { // Loop until the user chooses to exit
+    // Clear the console for a clean menu interface
+    clear();
+
+    // Display the title with a dramatic animation
+    slowPrint("========================================\n");
+    slowPrint("        WELCOME TO THE NEWS HUB\n");
+    slowPrint("========================================\n");
+
+    // Provide an overview of options
+    cout << "\nMAIN MENU OPTIONS:\n";
+    cout << "1. Create News\n";
+    cout << "2. Edit News\n";
+    cout << "3. Delete News\n";
+    cout << "4. Edit Profile\n";
+    cout << "5. View Calendar\n";
+    cout << "6. Read News\n";
+    cout << "7. Sign Out\n";
+
+    // Simulate sound effect for user input readiness
+    cout << "\n*Ding* Please select an option: ";
+
+    // Get the user's choice
+    int choice;
+    cin >> choice;
+    cin.ignore();
+
+    // Use a switch-case for menu navigation
+    switch (choice) {
+    case 1:
+        cout << "\nRedirecting to Create News...\n";
+        slowPrint("Loading...\n");
+        createNews(); // Calls the Create News function
+        break;
+    case 2:
+        cout << "\nRedirecting to Edit News...\n";
+        slowPrint("Loading...\n");
+        // editNews(); // Calls the Edit News function
+        break;
+    case 3:
+        cout << "\nRedirecting to Delete News...\n";
+        slowPrint("Loading...\n");
+        deleteNews(); // Calls the Delete News function
+        break;
+    case 4:
+        cout << "\nRedirecting to Edit Profile...\n";
+        slowPrint("Loading...\n");
+        // editProfile(); // Calls the Edit Profile function
+        break;
+    case 5:
+        cout << "\nOpening Calendar...\n";
+        slowPrint("Loading...\n");
+        // calendar(); // Calls the Calendar function
+        break;
+    case 6:
+        cout << "\nSigning Out...\n";
+        slowPrint("Goodbye!\n");
+        MENU = ENTRY; // Reset to the entry menu
+        return;       // Exit the menu loop
+    case 7:
+        cout << "\nSigning Out...\n";
+        slowPrint("Goodbye!\n");
+        MENU = ENTRY; // Reset to the entry menu
+        return;       // Exit the menu loop
+    default:
+        cout << "\nInvalid choice! Please try again.\n";
+        slowPrint("Returning to menu...\n");
+        break;
+    }
+  }
 }
 
 void createNews()
@@ -273,6 +340,11 @@ void deleteNews()
     }    
   }
   db->deleteNews(id);
+}
+
+void readNews()
+{
+  
 }
 
 // void editNews()
