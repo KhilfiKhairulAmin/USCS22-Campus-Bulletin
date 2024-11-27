@@ -1,11 +1,16 @@
+#ifndef CALENDAR_H
+#define CALENDAR_H
+
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cstdlib>
 
-using namespace std;
-
-int main() 
+void calendar() 
 {
+    system("clear");
+    using namespace std;
+
     const int daysInWeek = 7;
     const int weeksInMonth = 5;
 
@@ -50,6 +55,6 @@ int main()
         cout << "|\n";
         cout << "+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
     }
-
-    return 0;
 }
+
+#endif // CALENDAR_H

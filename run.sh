@@ -1,3 +1,3 @@
-g++ main.cpp -o app.exe
+g++ main.cpp -lsfml-audio -lsfml-system -o main
 
-./app.exe
+./main.exe
