@@ -36,6 +36,7 @@ Database* db;
 const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
+Publisher pub;
 int PID = 0;   // Publisher ID of current user
 int MENU = ENTRY;  // Current Menu number the user is interacting with
 
@@ -72,7 +73,8 @@ int main()
       signIn();
     else if (MENU == MAIN_MENU)
       mainMenu();
-    
+    // TODO Read, create, edit, delete News + edit publisher
+    // TODO 
   }
 }
 
@@ -100,7 +102,7 @@ void entryMenu()
       {
         slowPrint("SIGN IN");
         cout << endl;
-        slowPrint("Sign in to your account");
+        slowPrint("Sign in to your account", 40);
       }
       else
       {
@@ -232,6 +234,7 @@ void mainMenu() {
     cout << "5. View Calendar\n";
     cout << "6. Read News\n";
     cout << "7. Sign Out\n";
+    // TODO Create news, edit news, delete news, edit profile, view calendar, 
 
     // Simulate sound effect for user input readiness
     cout << "\n*Ding* Please select an option: ";
