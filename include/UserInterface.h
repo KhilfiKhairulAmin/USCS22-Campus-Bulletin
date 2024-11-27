@@ -14,6 +14,7 @@
 #define DEFAULT_INTERVAL 40
 using namespace std;
 int ROW = 1;
+int COL = 1;
 
 void clear()
 {
@@ -51,10 +52,10 @@ void center(int offset)
   getMaxXY(rows, cols);
 
   // Calculate center position
-  int centerCol = (cols - offset) / 2;
+  COL = (cols - offset) / 2;
 
   // Move the cursor to the center
-  cout << "\033[" << ROW++ << ";" << centerCol << "H";
+  cout << "\033[" << ROW++ << ";" << COL << "H";
 }
 
 void slowPrint(string msg, int intervalMs = DEFAULT_INTERVAL, string color = Color_Off)
@@ -100,6 +101,7 @@ void setPercentage(int r = 0, int c = 0)
 
 void sidebar(vector<string> options, int selected)
 {
+  setCursor(1, 1);
   int x, y;
   getMaxXY(x, y);
   x--;
@@ -177,9 +179,9 @@ bool isAllowedCharacter(int key) {
     return false; // Reject all other keys
 }
 
-string inputText(int maxSize, int minSize = 1, string def = "")
+string inputText(int maxSize, int minSize = 1, string def = "", string col = Cyan)
 {
-  cout << Cyan;
+  cout << col;
   string s = def;
   int key = 0;
 
@@ -220,9 +222,54 @@ string inputText(int maxSize, int minSize = 1, string def = "")
   return s;
 }
 
-string inputEmail(int maxSize, int minSize = 1, string def = "")
+// string inputParagraph(int maxSize, int minSize = 1, string def = "", string col = Cyan)
+// {
+//   cout << col;
+//   string s = def;
+//   int key = 0;
+//   vector<string> lines;
+
+//   while (true)
+//   {
+//     center(s.length());
+//     ROW--;
+//     cout << flush << s;
+//     key = _getch();
+//     center(s.length());
+//     ROW--;
+//     cout << string(s.length(), ' ');
+    
+//     if (key == 27) {} // ESC key
+
+//     // Handle the Enter key
+//     if (s.length() >= minSize && key == 13)
+//     {
+//       break;
+//     }
+//     else if (key == 8)
+//     { // Handle Backspace key
+//       if (!s.empty()) {
+//           s.pop_back();
+//       }
+//     }
+//     else if (s.length() < maxSize && isAllowedCharacter(char(key)))
+//     {
+//       // Handle other keys (add to input)
+//       s += char(key);
+//     }
+//     else if 
+//   }
+//   center(s.length());
+//   ROW--;
+//   cout << s;
+//   ROW += 2;
+//   cout << Color_Off;
+//   return s;
+// }
+
+string inputEmail(int maxSize, int minSize = 1, string def = "", string col = Cyan)
 {
-  cout << Cyan;
+  cout << col;
   string s = def;
   int key = 0;
   while (true)
@@ -262,9 +309,9 @@ string inputEmail(int maxSize, int minSize = 1, string def = "")
   return s;
 }
 
-string inputPhone(int maxSize, int minSize = 1, string def = "")
+string inputPhone(int maxSize, int minSize = 1, string def = "", string col = Cyan)
 {
-  cout << Cyan;
+  cout << col;
   string s = def;
   int key = 0;
   while (true)
@@ -304,6 +351,48 @@ string inputPhone(int maxSize, int minSize = 1, string def = "")
   return s;
 }
 
+int inputNumber(int maxSize, int minSize = 1, string def = "", string col = Cyan)
+{
+  cout << col;
+  string s = def;
+  int key = 0;
+  while (true)
+  {
+    center(s.length());
+    ROW--;
+    cout << flush << s;
+    key = _getch();
+    center(s.length());
+    ROW--;
+    cout << string(s.length(), ' ');
+    
+    if (key == 27) {} // ESC key
+
+    // Handle the Enter key
+    if (s.length() >= minSize && key == 13)
+    {
+      break;
+    }
+    else if (key == 8)
+    { // Handle Backspace key
+      if (!s.empty()) {
+          s.pop_back();
+      }
+    }
+    else if (s.length() < maxSize && isdigit(char(key)))
+    {
+      // Handle other keys (add to input)
+      s += char(key);
+    }
+  }
+  center(s.length());
+  ROW--;
+  cout << s;
+  ROW += 2;
+  cout << Color_Off;
+  return atoi(s.c_str());
+}
+
 string inputPassword(int maxSize, int minSize = 1, string def = "")
 {
   string s = def;
@@ -339,7 +428,6 @@ string inputPassword(int maxSize, int minSize = 1, string def = "")
   }
   center(s.length());
   ROW--;
-  cout << s;
   ROW += 2;
   return s;
 }

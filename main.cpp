@@ -70,6 +70,8 @@ int main()
       signIn();
     else if (MENU == MAIN_MENU)
       mainMenu();
+    else
+      break;
   }
 }
 
@@ -79,7 +81,7 @@ int main()
 
 void entryMenu()
 {
-  vector<string> opts = { "Log In", "Sign Up" };
+  vector<string> opts = { "Sign In", "Sign Up" };
   int selected = 0;
   MENU = SIGN_IN;
   bool flag = true;
@@ -88,16 +90,16 @@ void entryMenu()
   {
     if (key == 72 || key == 80)
     {
-      clear();
+      // clear();
       thread th(clickButtonSound);
       sidebar(opts, selected);
       th.join();
       setPercentage(20);
       if (selected == 0)
       {
-        print("LOG IN");
+        slowPrint("SIGN IN");
         cout << endl;
-        slowPrint("Sign in into your account");
+        slowPrint("Sign in to your account");
       }
       else
       {
@@ -142,7 +144,6 @@ void signUp()
 
   print("Email:");
   email = inputEmail(30, 10);
-  int i = 0;
   print("Password:");
   pass = inputPassword(20);  
   print("Organization Name:");
@@ -187,7 +188,7 @@ void signIn()
       continue;
     }    
   }
-  
+
   print("");
   while (true)
   {
@@ -214,7 +215,80 @@ void signIn()
 void mainMenu()
 {
   clear();
-  print("MAIN MENU");
-  int i;
-  cin >> i;
+  createNews();
+  MENU = -1;
+}
+
+void createNews()
+{
+  string title, content;
+  slowPrint("Title:");
+  title = inputText(50, 3, "", Yellow);
+
+  string p;
+
+  slowPrint("Body:");
+  slowPrint("Enter '$' to finish writing");
+  print("");
+  string t = "";
+  while (true)
+  {
+    string t = inputText(50, 0, "", Yellow);
+    ROW--;
+    if (t == "$")
+      break;
+    
+    p += t + "\n";
+  }
+  db->createNews(PID, title, p);
+}
+
+void editNews()
+{
+  int id, index;
+
+  while (true)
+  {
+    print("News ID:");
+    id = inputNumber(5);
+    try
+    {
+      index = db->searchNewsId(id);
+      break;
+    }
+    catch(const char* c)
+    {
+      ROW -= 3;
+      center((to_string(id)).length());
+      print(string((to_string(id)).length(), ' '));
+      ROW -= 2;
+      center(7);
+      print(string(7, ' '));
+      ROW -= 3;
+      print("News with " + to_string(id) + " not found", Red);
+      continue;
+    }    
+  }
+
+  string title, content;
+  News n = news->at(index);
+  slowPrint("Title:");
+  title = inputText(50, 3, n.title, Yellow);
+
+  string p;
+
+  slowPrint("Body:");
+  slowPrint("Enter '$' to finish writing");
+  print("");
+  string t = "";
+  while (true)
+  {
+    string t = inputText(50, 0, Yellow);
+    ROW--;
+    if (t == "$")
+      break;
+    
+    p += t + "\n";
+  }
+  db->editNews(PID, title, p);
 }

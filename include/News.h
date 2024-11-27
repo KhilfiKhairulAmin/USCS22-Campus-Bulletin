@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 struct News
 {
@@ -52,11 +53,21 @@ class NewsManager
         now,
         Datetime(),
         title,
-        content,
+        to_string(nextNewsId),
         0,
         0,
         false
       });
+
+      ofstream nf(("news/" + to_string(nextNewsId) + ".txt").c_str());
+
+      if (!nf.is_open())
+      {
+        cout << "NOT OPEN!";
+      }
+      nf << content;
+      nf.close();
+
       totalNews++;
       nextNewsId++;
       saveNews();
@@ -73,6 +84,7 @@ class NewsManager
         n->title = newTitle;
       if (newContent != "")
         n->content = newContent;
+      n->editedAt = now;
       saveNews();
     }
 
