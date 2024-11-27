@@ -36,7 +36,7 @@ Database* db;
 const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
-Publisher pub;
+Publisher this_pub;
 int PID = 0;   // Publisher ID of current user
 int MENU = ENTRY;  // Current Menu number the user is interacting with
 
@@ -73,8 +73,6 @@ int main()
       signIn();
     else if (MENU == MAIN_MENU)
       mainMenu();
-    // TODO Read, create, edit, delete News + edit publisher
-    // TODO 
   }
 }
 
@@ -216,6 +214,7 @@ void signIn()
 }
 
 void mainMenu() {
+  this_pub = publishers->at(PID);
   while (true) { // Loop until the user chooses to exit
     // Clear the console for a clean menu interface
     clear();
@@ -294,7 +293,7 @@ void mainMenu() {
           cout << "\nInvalid choice! Please try again.\n";
           slowPrint("Returning to menu...\n");
           break;
-      }
+    }
   }
 }
 
