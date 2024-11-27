@@ -162,11 +162,27 @@ int getRow()
 // Add sounds to all button press
 // Add more menu in main menu
 
+bool isAllowedCharacter(int key) {
+    // Check for alphabets, numbers, and space
+    if (isalnum(key) || key == ' ') {
+        return true;
+    }
+
+    // Allow specific special symbols (e.g., !@#$%^&*()-_+=,.;:<>?/ etc.)
+    std::string allowedSymbols = "!@#$%^&*()-_+=,.;:<>?/\\|[]{}'\"`~";
+    if (allowedSymbols.find(static_cast<char>(key)) != std::string::npos) {
+        return true;
+    }
+
+    return false; // Reject all other keys
+}
+
 string inputText(int maxSize, int minSize = 1, string def = "")
 {
   cout << Cyan;
   string s = def;
   int key = 0;
+
   while (true)
   {
     center(s.length());
@@ -180,7 +196,7 @@ string inputText(int maxSize, int minSize = 1, string def = "")
     if (key == 27) {} // ESC key
 
     // Handle the Enter key
-    if (s.length() > minSize && key == 13)
+    if (s.length() >= minSize && key == 13)
     {
       break;
     }
@@ -190,7 +206,7 @@ string inputText(int maxSize, int minSize = 1, string def = "")
           s.pop_back();
       }
     }
-    else if (s.length() < maxSize && isalnum(char(key)))
+    else if (s.length() < maxSize && isAllowedCharacter(char(key)))
     {
       // Handle other keys (add to input)
       s += char(key);
@@ -222,7 +238,7 @@ string inputEmail(int maxSize, int minSize = 1, string def = "")
     if (key == 27) {} // ESC key
 
     // Handle the Enter key
-    if (s.length() > minSize && s.find('@') != string::npos && key == 13)
+    if (s.length() >= minSize && s.find('@') != string::npos && key == 13)
     {
       break;
     }
@@ -264,7 +280,7 @@ string inputPhone(int maxSize, int minSize = 1, string def = "")
     if (key == 27) {} // ESC key
 
     // Handle the Enter key
-    if (s.length() > minSize && key == 13)
+    if (s.length() >= minSize && key == 13)
     {
       break;
     }
@@ -305,7 +321,7 @@ string inputPassword(int maxSize, int minSize = 1, string def = "")
     if (key == 27) {} // ESC key
 
     // Handle the Enter key
-    if (s.length() > minSize && key == 13)
+    if (s.length() >= minSize && key == 13)
     {
       break;
     }
