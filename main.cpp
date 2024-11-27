@@ -36,7 +36,7 @@ const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
 int PID = 0;   // Publisher ID of current user
-int MENU = ENTRY;  // Current Menu number the user is interacting with
+int MENU = MAIN_MENU;  // Current Menu number the user is interacting with
 
 void entryMenu(),     // Function prototypes for all menus
      signUp(),
@@ -218,9 +218,9 @@ void mainMenu() {
     clear();
 
     // Display the title with a dramatic animation
-    slowPrint("========================================\n");
-    slowPrint("        WELCOME TO THE NEWS HUB\n");
-    slowPrint("========================================\n");
+    print("========================================\n");
+    print("        WELCOME TO THE NEWS HUB         \n");
+    print("========================================\n");
 
     // Provide an overview of options
     cout << "\nMAIN MENU OPTIONS:\n";
@@ -268,15 +268,19 @@ void mainMenu() {
         // calendar(); // Calls the Calendar function
         break;
     case 6:
-        cout << "\nSigning Out...\n";
-        slowPrint("Goodbye!\n");
-        MENU = ENTRY; // Reset to the entry menu
-        return;       // Exit the menu loop
+        // cout << "\nSigning Out...\n";
+        // slowPrint("Goodbye!\n");
+        readNews();
+        int i;
+        cin >> i;
+        break;
+        // MENU = ENTRY; // Reset to the entry menu
+        // return;       // Exit the menu loop
     case 7:
         cout << "\nSigning Out...\n";
         slowPrint("Goodbye!\n");
-        MENU = ENTRY; // Reset to the entry menu
-        return;       // Exit the menu loop
+        // MENU = ENTRY; // Reset to the entry menu
+        // return;       // Exit the menu loop
     default:
         cout << "\nInvalid choice! Please try again.\n";
         slowPrint("Returning to menu...\n");
@@ -344,7 +348,13 @@ void deleteNews()
 
 void readNews()
 {
-  
+  for (auto it = news->rbegin(); it != news->rend(); it++)
+	{
+    cout << it->id << endl;
+    cout << it->title << endl;
+		cout << Datetime::datetimeToS(it->publishedAt) << endl;
+		// cout << it->content << endl << endl;
+	}
 }
 
 // void editNews()
