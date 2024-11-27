@@ -53,20 +53,11 @@ class NewsManager
         now,
         Datetime(),
         title,
-        to_string(nextNewsId),
+        content,
         0,
         0,
         false
       });
-
-      ofstream nf(("news/" + to_string(nextNewsId) + ".txt").c_str());
-
-      if (!nf.is_open())
-      {
-        cout << "NOT OPEN!";
-      }
-      nf << content;
-      nf.close();
 
       totalNews++;
       nextNewsId++;
@@ -121,6 +112,10 @@ class NewsManager
           fields.push_back(id);
         }
 
+        for (int i = 0; i < fields[6].size(); i++)
+          if (fields[6][i] == '$')
+            fields[6][i] = '\n';
+
         news->push_back(News{
           stoi(fields[0]),
           stoi(fields[1]),
@@ -151,7 +146,12 @@ class NewsManager
       outNews << "id^publisherId^createdAt^editedAt^publishedAt^title^content^numOfLikes^numOfDislikes^isPublished\n";
 
       for (auto it = news->begin(); it < news->end(); it++)
+      {
+        for (int i = 0; i < it->content.size(); i++)
+          if (it->content[i] == '$')
+            it->content[i] = '\n';
         outNews << it->id << "^" << it->publisherId << "^" << Datetime::datetimeToS(it->createdAt) << "^" << Datetime::datetimeToS(it->editedAt) << "^" << Datetime::datetimeToS(it->publishedAt) << "^" << it->title << "^" << it->content << "^" << it->numOfLikes << "^" << it->numOfDislikes << "^" << it->isPublished << "\n";
+      }
     }
 
     /** Stores `News` inside database and deletes DMA inside `News` class. */

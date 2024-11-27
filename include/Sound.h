@@ -7,6 +7,7 @@ using namespace std;
 sf::SoundBuffer click;
 sf::SoundBuffer buttonClick;
 
+
 void loadSounds()
 {
   click.loadFromFile("sounds/click_sound.wav");

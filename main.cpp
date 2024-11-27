@@ -10,6 +10,7 @@
 
 #include "include/Database.h"       // For connecting to the database of the application
 #include "include/UserInterface.h"  // For reusing same UI components multiple times
+#include "include/Calendar.h"
 #include <iostream>                 // For handling input and output
 #include <iomanip>                  // For formatting output
 #include <csignal>                  // For handling special input
@@ -35,6 +36,7 @@ Database* db;
 const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
+Publisher this_pub;
 int PID = 0;   // Publisher ID of current user
 int MENU = ENTRY;  // Current Menu number the user is interacting with
 
@@ -71,7 +73,6 @@ int main()
       signIn();
     else if (MENU == MAIN_MENU)
       mainMenu();
-    
   }
 }
 
@@ -99,7 +100,7 @@ void entryMenu()
       {
         slowPrint("SIGN IN");
         cout << endl;
-        slowPrint("Sign in to your account");
+        slowPrint("Sign in to your account", 40);
       }
       else
       {
@@ -213,6 +214,7 @@ void signIn()
 }
 
 void mainMenu() {
+  this_pub = publishers->at(PID);
   while (true) { // Loop until the user chooses to exit
     // Clear the console for a clean menu interface
     clear();
@@ -231,6 +233,7 @@ void mainMenu() {
     cout << "5. View Calendar\n";
     cout << "6. Read News\n";
     cout << "7. Sign Out\n";
+    // TODO Create news, edit news, delete news, edit profile, view calendar, 
 
     // Simulate sound effect for user input readiness
     cout << "\n*Ding* Please select an option: ";
@@ -240,51 +243,56 @@ void mainMenu() {
     cin >> choice;
     cin.ignore();
 
+    clear();
+
+    string line;
+
     // Use a switch-case for menu navigation
     switch (choice) {
-    case 1:
-        cout << "\nRedirecting to Create News...\n";
-        slowPrint("Loading...\n");
-        createNews(); // Calls the Create News function
-        break;
-    case 2:
-        cout << "\nRedirecting to Edit News...\n";
-        slowPrint("Loading...\n");
-        // editNews(); // Calls the Edit News function
-        break;
-    case 3:
-        cout << "\nRedirecting to Delete News...\n";
-        slowPrint("Loading...\n");
-        deleteNews(); // Calls the Delete News function
-        break;
-    case 4:
-        cout << "\nRedirecting to Edit Profile...\n";
-        slowPrint("Loading...\n");
-        editProfile(); // Calls the Edit Profile function
-        break;
-    case 5:
-        cout << "\nOpening Calendar...\n";
-        slowPrint("Loading...\n");
-        // calendar(); // Calls the Calendar function
-        break;
-    case 6:
-        // cout << "\nSigning Out...\n";
-        // slowPrint("Goodbye!\n");
-        readNews();
-        int i;
-        cin >> i;
-        break;
-        // MENU = ENTRY; // Reset to the entry menu
-        // return;       // Exit the menu loop
-    case 7:
-        cout << "\nSigning Out...\n";
-        slowPrint("Goodbye!\n");
-        // MENU = ENTRY; // Reset to the entry menu
-        // return;       // Exit the menu loop
-    default:
-        cout << "\nInvalid choice! Please try again.\n";
-        slowPrint("Returning to menu...\n");
-        break;
+      case 1:
+          cout << "\nRedirecting to Create News...\n";
+          slowPrint("Loading...\n");
+          createNews(); // Calls the Create News function
+          break;
+      case 2:
+          // cout << "\nRedirecting to Edit News...\n";
+          // slowPrint("Loading...\n");
+          editNews(); // Calls the Edit News function
+          break;
+      case 3:
+          // cout << "\nRedirecting to Delete News...\n";
+          // slowPrint("Loading...\n");
+          deleteNews(); // Calls the Delete News function
+          break;
+      case 4:
+          // cout << "\nRedirecting to Edit Profile...\n";
+          // slowPrint("Loading...\n");
+          getline(cin, line);
+          editProfile(); // Calls the Edit Profile function
+          break;
+      case 5:
+          // cout << "\nOpening Calendar...\n";
+          // slowPrint("Loading...\n");
+          calendar(); // Calls the Calendar function
+          getline(cin, line);
+          break;
+      case 6:
+          // cout << "\nSigning Out...\n";
+          // slowPrint("Goodbye!\n");
+          readNews();
+          getline(cin, line);
+          break;
+          // MENU = ENTRY; // Reset to the entry menu
+          // return;       // Exit the menu loop
+      case 7:
+          cout << "\nSigning Out...\n";
+          slowPrint("Goodbye!\n");
+          MENU = ENTRY; // Reset to the entry menu
+          return;       // Exit the menu loop
+      default:
+          cout << "\nInvalid choice! Please try again.\n";
+          slowPrint("Returning to menu...\n");
+          break;
     }
   }
 }
@@ -371,7 +379,7 @@ void readNews() {
 		cout << Datetime::datetimeToS(it->publishedAt) << endl;
 		// cout << it->content << endl << endl;
 	}
-}*/
+}
 
 void editProfile()
 {
@@ -389,52 +397,52 @@ void editProfile()
   db->editPublisher(p.id, p.email, p.password, nName, nAbout, nPhone);
 }
 
-// void editNews()
-// {
-//   int id, index;
+void editNews()
+{
+  int id, index;
 
-//   while (true)
-//   {
-//     print("News ID:");
-//     id = inputNumber(5);
-//     try
-//     {
-//       index = db->searchNewsId(id);
-//       break;
-//     }
-//     catch(const char* c)
-//     {
-//       ROW -= 3;
-//       center((to_string(id)).length());
-//       print(string((to_string(id)).length(), ' '));
-//       ROW -= 2;
-//       center(7);
-//       print(string(7, ' '));
-//       ROW -= 3;
-//       print("News with " + to_string(id) + " not found", Red);
-//       continue;
-//     }    
-//   }
+  while (true)
+  {
+    print("News ID:");
+    id = inputNumber(5);
+    try
+    {
+      index = db->searchNewsId(id);
+      break;
+    }
+    catch(const char* c)
+    {
+      ROW -= 3;
+      center((to_string(id)).length());
+      print(string((to_string(id)).length(), ' '));
+      ROW -= 2;
+      center(7);
+      print(string(7, ' '));
+      ROW -= 3;
+      print("News with " + to_string(id) + " not found", Red);
+      continue;
+    }    
+  }
 
-//   string title, content;
-//   News n = news->at(index);
-//   slowPrint("Title:");
-//   title = inputText(50, 3, n.title, Yellow);
+  string title, content;
+  News n = news->at(index);
+  slowPrint("Title:");
+  title = inputText(50, 3, n.title, Yellow);
 
-//   string p;
+  string p;
 
-//   slowPrint("Body:");
-//   slowPrint("Enter '$' to finish writing");
-//   print("");
-//   string t = "";
-//   while (true)
-//   {
-//     string t = inputText(50, 0, Yellow);
-//     ROW--;
-//     if (t == "$")
-//       break;
+  slowPrint("Body:");
+  slowPrint("Enter '$' to finish writing");
+  print("");
+  string t = "";
+  while (true)
+  {
+    string t = inputText(50, 0, Yellow);
+    ROW--;
+    if (t == "$")
+      break;
     
-//     p += t + "\n";
-//   }
-//   db->editNews(PID, title, p);
-// }
+    p += t + "\n";
+  }
+  db->editNews(PID, title, p);
+}

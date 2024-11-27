@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include "Colors.h"
 #include <string>
 using namespace std;
 
@@ -22,31 +23,31 @@ void calendar()
     int currentDay = 1; 
 
     // Display calendar header
-    cout << "+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
-    cout << "|        Sun          |        Mon          |        Tue          |        Wed          |        Thu          |        Fri          |        Sat          |\n";
-    cout << "+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
+    cout << Yellow << "+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
+    cout << Yellow<<"|        Sun          |        Mon          |        Tue          |        Wed          |        Thu          |        Fri          |        Sat          |\n";
+    cout << Yellow<<"+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
 
     // Loop through each week
     for (int week = 0; week < weeksInMonth; ++week) {
         for (int day = 0; day < daysInWeek; ++day) {
             if (week == 0 && day < startDate) {
                 // Print empty cells before the start date
-                cout << "|                     ";
+                cout << Yellow <<"|                     ";
             } else if (currentDay <= 30) {
                 if (!calendar[week][day].empty()) {
                     // Print the date and event, aligned properly
-                    cout << "| " << right << setw(2) << currentDay << " " << left << setw(17) << calendar[week][day].substr(0, 17);
+                    cout << Yellow << "| " << right << setw(2) << currentDay << " " << left << setw(17) << calendar[week][day].substr(0, 17);
                 } else {
                     // Print only the date for empty cells
-                    cout << "| " << right << setw(2) << currentDay << "                  ";
+                    cout << Yellow <<"| " << right << setw(2) << currentDay << "                  ";
                 }
                 currentDay++; // Increment only when a date is printed
             } else {
                 // Print empty cells after the last date of the month
-                cout << "|                     ";
+                cout << Yellow <<"|                     ";
             }
         }
-        cout << "|\n";
-        cout << "+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
+        cout << Yellow << "|\n";
+        cout << Yellow <<"+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
     }
 }
