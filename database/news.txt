@@ -9,3 +9,8 @@ id^publisherId^createdAt^editedAt^publishedAt^title^content^numOfLikes^numOfDisl
 8^6^27/11/2024/18/49/27^27/11/2024/18/49/27^0/0/0/0/0/0^Cake^8^0^0^0
 9^0^27/11/2024/20/31/53^27/11/2024/20/31/53^0/0/0/0/0/0^New News^9^0^0^0
 10^0^27/11/2024/20/53/34^27/11/2024/20/53/34^0/0/0/0/0/0^fewifowefioewioew^fnewofnewiowen^0^0^0
+11^7^27/11/2024/21/2/2^27/11/2024/21/2/2^0/0/0/0/0/0^Kes Jenazah Terbang^Satu Hari saya nampak ade jenazah terbang atas
+masjid cemara berdekatan tong sampah sebelah 
+toilet.
+
+^0^0^0

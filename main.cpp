@@ -49,7 +49,8 @@ void entryMenu(),     // Function prototypes for all menus
      deleteNews(),
      editProfile(),
      readNews(),
-     calendar();
+     calendar(),
+     readSingleNews();
 
 
 /*---------------------------------------------[ MAIN PROGRAM ]----------------------------------------------------------------*/
@@ -289,6 +290,8 @@ void mainMenu() {
           slowPrint("Goodbye!\n");
           MENU = ENTRY; // Reset to the entry menu
           return;       // Exit the menu loop
+      case 8:
+          readSingleNews();
       default:
           cout << "\nInvalid choice! Please try again.\n";
           slowPrint("Returning to menu...\n");
@@ -319,6 +322,17 @@ void createNews()
     p += t + "\n";
   }
   db->createNews(PID, title, p);
+}
+
+void readSingleNews()
+{
+  slowPrint("READ NEWS");
+  slowPrint("Enter ID:");
+  int id = inputNumber(5, 1);
+  int index = db->searchNewsId(id);
+  cout << news->at(index).content << endl;
+  string line;
+  getline(cin, line);
 }
 
 void deleteNews()
@@ -366,7 +380,7 @@ void readNews()
         // cout << "| Content: " << it->content << endl;
         // cout << "+----------------------------------+" << endl;
         cout << endl;
-}
+  }
 }
 
 void editProfile()
