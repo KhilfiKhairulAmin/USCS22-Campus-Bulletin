@@ -70,9 +70,7 @@ int main()
       signIn();
     else if (MENU == MAIN_MENU)
       mainMenu();
-    else if (MENU == MAIN_MENU)
-      mainMenu();
-      break;
+    
   }
 }
 
@@ -91,7 +89,7 @@ void entryMenu()
   {
     if (key == 72 || key == 80)
     {
-      // clear();
+      clear();
       thread th(clickButtonSound);
       sidebar(opts, selected);
       th.join();
@@ -216,7 +214,7 @@ void signIn()
 void mainMenu()
 {
   clear();
-  createNews();
+  while(true)
   MENU = -1;
 }
 
@@ -242,6 +240,39 @@ void createNews()
     p += t + "\n";
   }
   db->createNews(PID, title, p);
+}
+
+void deleteNews()
+{
+  int id, index;
+  print("");
+  while (true)
+  {
+    print("News ID:");
+    id = inputNumber(5);
+    try
+    {
+      index = db->searchNewsId(id);
+      cout << news->at(index).publisherId << PID;
+
+      if (news->at(index).publisherId != news->at(PID).publisherId)
+        throw "News doesn't belong to you.";
+      break;
+    }
+    catch(const char* c)
+    {
+      ROW -= 3;
+      center(to_string(id).length());
+      print(string(to_string(id).length(), ' '));
+      ROW -= 2;
+      center(9);
+      print(string(7, ' '));
+      ROW -= 3;
+      print(c, Red);
+      continue;
+    }    
+  }
+  db->deleteNews(id);
 }
 
 // void editNews()

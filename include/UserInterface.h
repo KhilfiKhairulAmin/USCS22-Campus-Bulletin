@@ -101,7 +101,6 @@ void setPercentage(int r = 0, int c = 0)
 
 void sidebar(vector<string> options, int selected)
 {
-  setCursor(1, 1);
   int x, y;
   getMaxXY(x, y);
   x--;
