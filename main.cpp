@@ -11,6 +11,7 @@
 #include "include/Database.h"       // For connecting to the database of the application
 #include "include/UserInterface.h"  // For reusing same UI components multiple times
 #include "include/Calendar.h"
+#include "include/Colors.h"
 #include <iostream>                 // For handling input and output
 #include <iomanip>                  // For formatting output
 #include <csignal>                  // For handling special input
@@ -38,7 +39,7 @@ const vector<News>* news;             // Stores all news data
 
 Publisher this_pub;
 int PID = 0;   // Publisher ID of current user
-int MENU = ENTRY;  // Current Menu number the user is interacting with
+int MENU = MAIN_MENU;  // Current Menu number the user is interacting with
 
 void entryMenu(),     // Function prototypes for all menus
      signUp(),
@@ -220,13 +221,15 @@ void mainMenu() {
     clear();
 
     // Display the title with a dramatic animation
-    print("========================================\n");
-    print("        WELCOME TO THE NEWS HUB         \n");
-    print("========================================\n");
+    print("========================================\n", Purple);
+    print("        WELCOME TO THE NEWS HUB         \n", Yellow);
+    print("========================================\n", Purple);
 
     // Provide an overview of options
+    cout << Cyan << "*************************" ;
     cout << "\nMAIN MENU OPTIONS:\n";
-    cout << "1. Create News\n";
+    cout << "*************************" << endl ;
+    cout << Yellow << "1. Create News\n";
     cout << "2. Edit News\n";
     cout << "3. Delete News\n";
     cout << "4. Edit Profile\n";
