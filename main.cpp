@@ -39,7 +39,7 @@ const vector<News>* news;             // Stores all news data
 
 Publisher this_pub;
 int PID = 0;   // Publisher ID of current user
-int MENU = MAIN_MENU;  // Current Menu number the user is interacting with
+int MENU = ENTRY;  // Current Menu number the user is interacting with
 
 void entryMenu(),     // Function prototypes for all menus
      signUp(),
@@ -392,9 +392,9 @@ void editProfile()
   print("EDIT PROFILE");
   slowPrint("Organization Name: ");
   nName = inputText(20, 3, this_pub.name);
-  slowPrint("Organization Name: ");
+  slowPrint("Organization About: ");
   nAbout = inputText(20, 3, this_pub.about);
-  slowPrint(": ");
+  slowPrint("Phone Number: ");
   nPhone = inputText(20, 3, this_pub.phone);
 
   db->editPublisher(this_pub.id, this_pub.email, this_pub.password, nName, nAbout, nPhone);
