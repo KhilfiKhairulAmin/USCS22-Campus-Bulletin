@@ -357,7 +357,6 @@ void deleteNews()
 
 void readNews()
 {
-  void readNews() {
     for (auto it = news->rbegin(); it != news->rend(); it++) {
         cout << "+----------------------------------+" << endl;
         cout << "| ID: " << it->id << endl;
@@ -370,7 +369,6 @@ void readNews()
         // cout << "| Content: " << it->content << endl;
         // cout << "+----------------------------------+" << endl;
         cout << endl;
-    }
 }
 }
 
