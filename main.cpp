@@ -228,8 +228,8 @@ void mainMenu() {
 
     // Provide an overview of options
     cout << Cyan << "*************************" ;
-    cout << "\nMAIN MENU OPTIONS:\n";
-    cout << "*************************" << endl ;
+    cout << Yellow<< "\nMAIN MENU OPTIONS:\n";
+    cout << Cyan<<"*************************" << endl ;
     cout << Yellow << "1. Create News\n";
     cout << "2. Edit News\n";
     cout << "3. Delete News\n";
@@ -373,14 +373,14 @@ void deleteNews()
 
 void readNews() {
     for (auto it = news->rbegin(); it != news->rend(); it++) {
-        cout << Purple<<"+----------------------------------+" << endl;
-        cout << White<<"| ID: " << it->id << endl;
+        cout << Purple<<"\n\n+---------------------------------------------------------------------+" << endl;
+        cout << Blue<<"| ID: " << it->id << endl;
         cout << "| Title: " << it->title << endl;
-        cout << "+----------------------------------+" << endl;
-        cout << "| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
+        cout << White<<"+---------------------------------------------------------------------+" << endl;
+        cout << Blue<<"| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
         // Uncomment if you want to display the content
         cout << "| Content: " << it->content << endl;
-        cout << Purple<<"+----------------------------------+" << endl;
+        cout << Purple<<"+---------------------------------------------------------------------+" << endl;
         cout << endl;
 }
 }
