@@ -70,7 +70,8 @@ int main()
       signIn();
     else if (MENU == MAIN_MENU)
       mainMenu();
-    else
+    else if (MENU == MAIN_MENU)
+      mainMenu();
       break;
   }
 }
@@ -243,52 +244,52 @@ void createNews()
   db->createNews(PID, title, p);
 }
 
-void editNews()
-{
-  int id, index;
+// void editNews()
+// {
+//   int id, index;
 
-  while (true)
-  {
-    print("News ID:");
-    id = inputNumber(5);
-    try
-    {
-      index = db->searchNewsId(id);
-      break;
-    }
-    catch(const char* c)
-    {
-      ROW -= 3;
-      center((to_string(id)).length());
-      print(string((to_string(id)).length(), ' '));
-      ROW -= 2;
-      center(7);
-      print(string(7, ' '));
-      ROW -= 3;
-      print("News with " + to_string(id) + " not found", Red);
-      continue;
-    }    
-  }
+//   while (true)
+//   {
+//     print("News ID:");
+//     id = inputNumber(5);
+//     try
+//     {
+//       index = db->searchNewsId(id);
+//       break;
+//     }
+//     catch(const char* c)
+//     {
+//       ROW -= 3;
+//       center((to_string(id)).length());
+//       print(string((to_string(id)).length(), ' '));
+//       ROW -= 2;
+//       center(7);
+//       print(string(7, ' '));
+//       ROW -= 3;
+//       print("News with " + to_string(id) + " not found", Red);
+//       continue;
+//     }    
+//   }
 
-  string title, content;
-  News n = news->at(index);
-  slowPrint("Title:");
-  title = inputText(50, 3, n.title, Yellow);
+//   string title, content;
+//   News n = news->at(index);
+//   slowPrint("Title:");
+//   title = inputText(50, 3, n.title, Yellow);
 
-  string p;
+//   string p;
 
-  slowPrint("Body:");
-  slowPrint("Enter '$' to finish writing");
-  print("");
-  string t = "";
-  while (true)
-  {
-    string t = inputText(50, 0, Yellow);
-    ROW--;
-    if (t == "$")
-      break;
+//   slowPrint("Body:");
+//   slowPrint("Enter '$' to finish writing");
+//   print("");
+//   string t = "";
+//   while (true)
+//   {
+//     string t = inputText(50, 0, Yellow);
+//     ROW--;
+//     if (t == "$")
+//       break;
     
-    p += t + "\n";
-  }
-  db->editNews(PID, title, p);
-}
+//     p += t + "\n";
+//   }
+//   db->editNews(PID, title, p);
+// }
