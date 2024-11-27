@@ -17,15 +17,13 @@ class Database: public NewsManager, public PublisherManager
     Database(): NewsManager(), PublisherManager() {};
 
     /** Get all `News` published by a `Publisher` with specified `id`. */
-    vector<int> getNewsByPublisher(int publisherId) const
+    vector<News> getNewsByPublisher(int publisherId) const
     {
-      int cur = 0;
-      vector<int> indexes;
+      vector<News> indexes;
       for (auto it = news->begin(); it < news->end();it++)
       {
         if (it->publisherId == publisherId)
-          indexes.push_back(cur);
-        cur++;
+          indexes.push_back(*it);
       }
       return indexes;
     }

@@ -120,7 +120,7 @@ void sidebar(vector<string> options, int selected)
 
   cout << "|   ";
   if (0 == selected)
-    cout << On_IGreen;
+    cout << On_IYellow;
   cout << " " << options[0] << " " << Color_Off;
   cout << string(length-5-options[0].size(), ' ') << "|\n";
 
@@ -133,7 +133,7 @@ void sidebar(vector<string> options, int selected)
     }
     cout << "|   ";
     if (i == selected)
-      cout << On_IGreen;
+      cout << On_IYellow;
     cout << " " << options[i] << " " << Color_Off;
 
     cout << string(length-5-options[i].size(), ' ')<< "|\n";
@@ -377,7 +377,7 @@ int inputNumber(int maxSize, int minSize = 1, string def = "", string col = On_I
           s.pop_back();
       }
     }
-    else if (s.length() < maxSize && isdigit(char(key)))
+    else if (s.length() < maxSize && (isdigit(char(key)) || char(key) == '-'))
     {
       // Handle other keys (add to input)
       s += char(key);
@@ -449,7 +449,7 @@ void sidebar2(vector<string> options, int selected)
   cout << "+" << string(length, '-') << "+\n";
   cout << "|" << space << "|\n";
   cout << "|   You are    " << string(length-14, ' ') << "|\n";
-  cout << BYellow << "|    READING NEWS " << string(length-17, ' ') << Color_Off << "|\n";
+  cout << BCyan << "|   READING NEWS  " << string(length-17, ' ') << Color_Off << "|\n";
   cout << "|" << space << "|\n";
   cout << "+" << string(length, '-') << "+\n";
   for (int j = 0; j < interval - 1; j++)
@@ -459,7 +459,7 @@ void sidebar2(vector<string> options, int selected)
 
   cout << "|   ";
   if (0 == selected)
-    cout << On_IGreen;
+    cout << On_ICyan;
   cout << " " << options[0] << " " << Color_Off;
   cout << string(length-5-options[0].size(), ' ') << "|\n";
 
@@ -472,7 +472,54 @@ void sidebar2(vector<string> options, int selected)
     }
     cout << "|   ";
     if (i == selected)
-      cout << On_IGreen;
+      cout << On_ICyan;
+    cout << " " << options[i] << " " << Color_Off;
+
+    cout << string(length-5-options[i].size(), ' ')<< "|\n";
+  }
+  
+  for (int j = 0; j < interval - 1; j++)
+  {
+    cout << "|" << space << "|\n";
+  }
+  cout << "+" << string(length, '-') << "+\n";
+}
+
+void sidebar3(vector<string> options, int selected)
+{
+  int x, y;
+  getMaxXY(x, y);
+  x--;
+  int length = y*20/100;
+  string space = string(length, ' ');
+  int interval = (x-5) / (options.size()+1);
+  cout << "+" << string(length, '-') << "+\n";
+  cout << "|" << space << "|\n";
+  cout << "|   You are    " << string(length-14, ' ') << "|\n";
+  cout << BRed << "|    DELETING NEWS" << string(length-17, ' ') << Color_Off << "|\n";
+  cout << "|" << space << "|\n";
+  cout << "+" << string(length, '-') << "+\n";
+  for (int j = 0; j < interval - 1; j++)
+  {
+    cout << "|" << space << "|\n";
+  }
+
+  cout << "|   ";
+  if (0 == selected)
+    cout << On_IRed;
+  cout << " " << options[0] << " " << Color_Off;
+  cout << string(length-5-options[0].size(), ' ') << "|\n";
+
+  for (int i = 1; i < options.size(); i++)
+  {
+    for (int j = 0; j < interval - 1; j++)
+    {
+      cout << "|" << space << "|\n";
+      ROW++;
+    }
+    cout << "|   ";
+    if (i == selected)
+      cout << On_IRed;
     cout << " " << options[i] << " " << Color_Off;
 
     cout << string(length-5-options[i].size(), ' ')<< "|\n";

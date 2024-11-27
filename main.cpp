@@ -50,8 +50,7 @@ void entryMenu(),     // Function prototypes for all menus
      deleteNews(),
      editProfile(),
      readNews(),
-     calendar(),
-     readSingleNews();
+     calendar();
 
 
 /*---------------------------------------------[ MAIN PROGRAM ]----------------------------------------------------------------*/
@@ -296,8 +295,6 @@ void mainMenu() {
           slowPrint("Goodbye!\n");
           MENU = ENTRY; // Reset to the entry menu
           return;       // Exit the menu loop
-      case 8:
-          readSingleNews();
       default:
           cout << "\nInvalid choice! Please try again.\n";
           slowPrint("Returning to menu...\n");
@@ -330,29 +327,132 @@ void createNews()
   db->createNews(PID, title, p);
 }
 
-void readSingleNews()
-{
-  slowPrint("READ NEWS");
-  slowPrint("Enter ID:");
-  int id = inputNumber(5, 1);
-  int index = db->searchNewsId(id);
-  cout << news->at(index).content << endl;
-  string line;
-  getline(cin, line);
-}
-
 void deleteNews()
 {
+    vector<string> opts = { "Recent", "Search", "Filter" };
+  int selected = 0;
+  bool flag = true;
+  int key = 72;
+  while (flag)
+    {
+    if (key == 72 || key == 80)
+    {
+      clear();
+      thread th(clickButtonSound);
+      sidebar3(opts, selected);
+      th.join();
+    }
+
+    int key = _getch(); // Get a single character input
+
+    // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
+    if (key == 224 || key == 0)
+    {
+      key = _getch();  // Get the actual key code after 224/0
+
+      if (key == 72)
+        selected = (selected + 2) % opts.size();
+      else if (key == 80)
+        selected = (selected+1) % opts.size();
+    }
+    else if (key == 13)
+    {
+      flag = false;
+    }
+  }
+
+  int x, y;
+  getMaxXY(x, y);
+  int length = y*20/100;
+  string space = string(length, ' ');
+
+  vector<News> ns;
+  if (selected == 0)
+    ns = db->getNewsByPublisher(this_pub.id);
+  else if (selected == 1)
+  {
+    string search;
+    cout << space + "Search: " << On_IYellow;
+    getline(cin, search);
+    cout << Color_Off;
+    vector<News> temp = db->searchTitle(search);
+
+    for (auto it = temp.begin(); it < temp.end(); it++)
+      if (it->publisherId == this_pub.id)
+        ns.push_back(*it);
+  }
+  else
+  {
+    cout << space + "Start Date (D/M/Y): " << On_IYellow;
+    string inD;
+    getline(cin, inD);
+    stringstream ss(inD);
+
+    int d, m, y;
+    getline(ss, inD, '/');
+    d = atoi(inD.c_str());
+    getline(ss, inD, '/');
+    m = atoi(inD.c_str());
+    getline(ss, inD, '/');
+    y = atoi(inD.c_str());
+
+    cout << Color_Off;
+
+    cout << space + "End Date (D/M/Y): " << On_IYellow;
+    getline(cin, inD);
+    stringstream ss2(inD);
+
+    int d2, m2, y2;
+    getline(ss2, inD, '/');
+    d2 = atoi(inD.c_str());
+    getline(ss2, inD, '/');
+    m2 = atoi(inD.c_str());
+    getline(ss2, inD, '/');
+    y2 = atoi(inD.c_str());
+
+    cout << Color_Off;
+
+    vector<News> temp = db->searchDate(Datetime{ y, m, d }, Datetime{ y2, m2, d2 });
+
+    for (auto it = temp.begin(); it < temp.end(); it++)
+      if (it->publisherId == this_pub.id)
+        ns.push_back(*it);
+  }
+
+  clear();
+  for (auto it = ns.begin(); it != ns.end(); it++)
+  {
+    cout << space << Purple<<"+---------------------------------------------------------------------+" << endl;
+    cout << space << Blue<<"| ID: " << it->id << endl;
+    cout << space << "| Title: " << it->title << endl;
+    cout << space << White<<"+---------------------------------------------------------------------+" << endl;
+    cout << space << Blue<<"| Published By: " << publishers->at(db->searchPublisherId(it->publisherId)).name << endl;
+    cout << space << Blue<<"| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
+    // Uncomment if you want to display the content
+    // cout << "| Content: " << it->content << endl;
+    cout << space << Purple<<"+---------------------------------------------------------------------+" << endl;
+    cout << space << endl;
+  }
+
+  cout << endl << space << On_ICyan << "Press space to continue..." << Color_Off;
+  string i;
+  getline(cin, i);
+
+  clear();
+
   int id, index;
   print("");
   while (true)
   {
-    print("News ID:");
-    id = inputNumber(5);
+    slowPrint("Enter News ID to delete (enter -1 to exit):", 40, UWhite);
+    id = inputNumber(5, 2);
+
+    if (id <= 0)
+      return;
+
     try
     {
       index = db->searchNewsId(id);
-      cout << news->at(index).publisherId << PID;
 
       if (news->at(index).publisherId != news->at(PID).publisherId)
         throw "News doesn't belong to you.";
@@ -371,6 +471,8 @@ void deleteNews()
       continue;
     }    
   }
+  clear();
+
   db->deleteNews(id);
 }
 
@@ -484,7 +586,11 @@ void readNews()
   while (true)
   {
     slowPrint("Enter News ID to read (enter -1 to exit):", 40, UWhite);
-    id = inputNumber(5, 0);
+    id = inputNumber(5, 2);
+
+    if (id <= 0)
+      return;
+
     try
     {
       index = db->searchNewsId(id);
