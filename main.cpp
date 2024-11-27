@@ -356,20 +356,16 @@ void deleteNews()
 
 void readNews()
 {
-  void readNews() {
     for (auto it = news->rbegin(); it != news->rend(); it++) {
-        cout << "+----------------------------------+" << endl;
+        cout << Purple<<"+----------------------------------+" << endl;
         cout << "| ID: " << it->id << endl;
-        cout << "+----------------------------------+" << endl;
         cout << "| Title: " << it->title << endl;
-        cout << "+----------------------------------+" << endl;
         cout << "| Published At: " << Datetime::datetimeToS(it->publishedAt) << endl;
         cout << "+----------------------------------+" << endl;
         // Uncomment if you want to display the content
         // cout << "| Content: " << it->content << endl;
         // cout << "+----------------------------------+" << endl;
         cout << endl;
-    }
 }
 }
 
