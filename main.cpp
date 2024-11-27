@@ -54,7 +54,7 @@ int main()
 {
   Database db = Database();
   publishers = db.getAllPublishers();
-  
+  loadSounds();
   mainMenu();
 }
 

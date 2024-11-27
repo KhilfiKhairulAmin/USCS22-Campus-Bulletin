@@ -1,5 +1,6 @@
 #ifndef USER_INTERFACE_H
 #define USER_INTERFACE_H
+#include "Sound.h"
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -32,12 +33,14 @@ void center(int offset)
 
 void slowPrint(string msg, int intervalMs = DEFAULT_INTERVAL)
 {
+  thread soundThread(clickSound, intervalMs*(msg.size()+1));
   center(msg.size());
   for (int i = 0; i < msg.size(); i++)
   {
     cout << msg[i];
     this_thread::sleep_for(chrono::milliseconds(intervalMs));
   }
+  soundThread.join();
 }
 
 void slowPrint(const char* msg, int intervalMs = DEFAULT_INTERVAL)
