@@ -358,10 +358,10 @@ void readNews()
 {
     for (auto it = news->rbegin(); it != news->rend(); it++) {
         cout << Purple<<"+----------------------------------+" << endl;
-        cout << "| ID: " << it->id << endl;
+        cout << White<<"|ID: " << it->id << endl;
         cout << "| Title: " << it->title << endl;
         cout << "| Published At: " << Datetime::datetimeToS(it->publishedAt) << endl;
-        cout << "+----------------------------------+" << endl;
+        cout << Purple<<"+----------------------------------+" << endl;
         // Uncomment if you want to display the content
         // cout << "| Content: " << it->content << endl;
         // cout << "+----------------------------------+" << endl;
