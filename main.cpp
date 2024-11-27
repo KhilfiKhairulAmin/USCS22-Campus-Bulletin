@@ -374,7 +374,7 @@ void deleteNews()
 void readNews() {
     for (auto it = news->rbegin(); it != news->rend(); it++) {
         cout << Purple<<"+----------------------------------+" << endl;
-        cout << "| ID: " << it->id << endl;
+        cout << White<<"| ID: " << it->id << endl;
         cout << "| Title: " << it->title << endl;
         cout << "+----------------------------------+" << endl;
         cout << "| Published At: " << Datetime::datetimeToS(it->createdAt) << endl;
