@@ -265,7 +265,7 @@ void mainMenu() {
     case 5:
         cout << "\nOpening Calendar...\n";
         slowPrint("Loading...\n");
-        // calendar(); // Calls the Calendar function
+        calendar(); // Calls the Calendar function
         break;
     case 6:
         // cout << "\nSigning Out...\n";
