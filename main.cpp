@@ -361,10 +361,9 @@ void readNews()
         cout << White<<"|ID: " << it->id << endl;
         cout << "| Title: " << it->title << endl;
         cout << "| Published At: " << Datetime::datetimeToS(it->publishedAt) << endl;
-        cout << Purple<<"+----------------------------------+" << endl;
         // Uncomment if you want to display the content
-        // cout << "| Content: " << it->content << endl;
-        // cout << "+----------------------------------+" << endl;
+        cout << "| Content: " << it->content << endl;
+        cout << Purple<<"+----------------------------------+" << endl;
         cout << endl;
 }
 }
