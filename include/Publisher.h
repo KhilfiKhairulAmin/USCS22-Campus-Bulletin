@@ -94,9 +94,9 @@ class PublisherManager
       Publisher* p = &(publishers->at(index));
       
       if (newEmail != "")
-        p->email = newEmail;
+        publishers->at(index).email = newEmail;
       if (newPassword != "")
-        p->password = newPassword;
+        publishers->at(index).password = newPassword;
       if (newName != "")
         p->name = newName;
       if (newAbout != "")

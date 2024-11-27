@@ -260,7 +260,7 @@ void mainMenu() {
     case 4:
         cout << "\nRedirecting to Edit Profile...\n";
         slowPrint("Loading...\n");
-        // editProfile(); // Calls the Edit Profile function
+        editProfile(); // Calls the Edit Profile function
         break;
     case 5:
         cout << "\nOpening Calendar...\n";
@@ -355,6 +355,22 @@ void readNews()
 		cout << Datetime::datetimeToS(it->publishedAt) << endl;
 		// cout << it->content << endl << endl;
 	}
+}
+
+void editProfile()
+{
+  clear();
+  Publisher p = publishers->at(PID);
+  string nName, nAbout, nPhone;
+  print("EDIT PROFILE");
+  slowPrint("Organization Name: ");
+  nName = inputText(20, 3, p.name);
+  slowPrint("Organization Name: ");
+  nAbout = inputText(20, 3, p.about);
+  slowPrint(": ");
+  nPhone = inputText(20, 3, p.phone);
+
+  db->editPublisher(p.id, p.email, p.password, nName, nAbout, nPhone);
 }
 
 // void editNews()
