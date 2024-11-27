@@ -21,7 +21,6 @@ int main()
 	cout<<"+++++++++++++++++++++INTEC CAMPUS BULLETIN+++++++++++++++++++++"<<endl;
 	cout<<"+++++++++++++++++++Stay INTEC, Eliminate FOMO++++++++++++++++++"<<endl;
 	
-	News info;
 	for (auto it = news->rbegin(); it != news->rend(); it++)
 	{
 		const News &newsItem = *it;
