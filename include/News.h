@@ -53,7 +53,7 @@ class NewsManager
         now,
         Datetime(),
         title,
-        to_string(nextNewsId),
+        content,
         0,
         0,
         false
