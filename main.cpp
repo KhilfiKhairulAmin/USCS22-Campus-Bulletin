@@ -36,7 +36,7 @@ const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
 int PID = 0;   // Publisher ID of current user
-int MENU = MAIN_MENU;  // Current Menu number the user is interacting with
+int MENU = ENTRY;  // Current Menu number the user is interacting with
 
 void entryMenu(),     // Function prototypes for all menus
      signUp(),
