@@ -9,7 +9,7 @@ const vector <News> *news;
 void getPublisher (int id)
 {
 	PublisherManager creator;
-	int index = PublisherManager.searchPublisherId(id);
+	int index = creator.searchPublisherId(id);
 	Publisher writer;
 	cout<<"\n\n"<<writer[index].name;
 	
