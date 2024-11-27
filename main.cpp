@@ -31,7 +31,7 @@ using namespace std;
 /*--------------------------------[ GLOBAL VARIABLES & FUNCTION PROTOTYPES ]---------------------------------------------------*/
 
 
-Database db;
+Database* db;
 const vector<Publisher>* publishers;  // Stores all publishers data
 const vector<News>* news;             // Stores all news data
 
@@ -54,9 +54,9 @@ void entryMenu(),     // Function prototypes for all menus
 
 int main()
 {
-  db = Database();
-  publishers = db.getAllPublishers();
-  news = db.getAllNews();
+  db = new Database();
+  publishers = db->getAllPublishers();
+  news = db->getAllNews();
   loadSounds();
 
   clear();
@@ -68,7 +68,8 @@ int main()
       signUp();
     else if (MENU == SIGN_IN)
       signIn();
-    else if (MENU == )
+    else if (MENU == MAIN_MENU)
+      mainMenu();
   }
 }
 
@@ -80,6 +81,7 @@ void entryMenu()
 {
   vector<string> opts = { "Log In", "Sign Up" };
   int selected = 0;
+  MENU = SIGN_IN;
   bool flag = true;
   int key = 72;
   while (flag)
@@ -87,26 +89,29 @@ void entryMenu()
     if (key == 72 || key == 80)
     {
       clear();
+      thread th(clickButtonSound);
       sidebar(opts, selected);
-      setPercentage(10);
+      th.join();
+      setPercentage(20);
       if (selected == 0)
       {
-        print("LOG IN", "1;33;40");
+        print("LOG IN");
+        cout << endl;
         slowPrint("Sign in into your account");
       }
       else
       {
-        print("SIGN UP", "1;33;40");
-        slowPrint("Register as a Publisher for INTEC Insider");
+        slowPrint("SIGN UP");
+        slowPrint("Register as a publisher");
       }
-      print("");
-      slowPrint("[ENTER]");
+      print("\n");
+      print("...");
     }
 
     int key = _getch(); // Get a single character input
 
     // Detect arrow keys: in Windows, arrow keys start with a 224 or 0 followed by the specific keycode
-    if (key == 224)
+    if (key == 224 || key == 0)
     {
       key = _getch();  // Get the actual key code after 224/0
 
@@ -125,38 +130,84 @@ void entryMenu()
       flag = false;
     }
   }
-    // if (MENU == SIGN_UP)
-    //   signUp();
-    // else
-    //   signIn();
 }
 
 void signUp()
 {
   print("");
   print("");
-  slowPrint("Enter your details as requested:");
+  slowPrint("Enter your information:");
 
   string email, pass, rPass, name, about, phone;
 
   print("Email:");
-  center(15);
-  getline(cin, email);
+  email = inputEmail(30, 10);
+  int i = 0;
   print("Password:");
-  center(15);
-  getline(cin, pass);
-  print("Repeat Password:");
-  center(15);
-  getline(cin, rPass);
+  pass = inputPassword(20);  
+  print("Organization Name:");
+  name = inputText(30, 3);
   print("About:");
-  center(15);
-  getline(cin, about);
+  about = inputText(250, 1);
   print("Phone:");
-  center(15);
-  getline(cin, phone);
+  phone = inputPhone(11, 9);
 
-  db.createPublisher(email, pass, name, about, phone);
+  PID = db->createPublisher(email, pass, name, about, phone);
+  MENU = MAIN_MENU;
+}
 
+void signIn()
+{
+  print("");
+  print("");
+  slowPrint("Enter your information:");
+
+  string email, password;
+  int index = -1;
+  print("");
+  while (true)
+  {
+    print("Email:");
+    email = inputEmail(30, 10);
+    try
+    {
+      index = db->searchEmail(email);
+      break;
+    }
+    catch(const char* c)
+    {
+      ROW -= 3;
+      center(email.length());
+      print(string(email.length(), ' '));
+      ROW -= 2;
+      center(7);
+      print(string(7, ' '));
+      ROW -= 3;
+      print("Email doesn't exist", Red);
+      continue;
+    }    
+  }
+  
+  print("");
+  while (true)
+  {
+    print("Password");
+    password = inputPassword(20);
+    if (password != publishers->at(index).password)
+    {
+      ROW -= 3;
+      center(password.length());
+      print(string(password.length(), ' '));
+      ROW -= 2;
+      center(7);
+      print(string(7, ' '));
+      ROW -= 3;
+      print("Password is wrong", Red);
+      continue;
+    }
+    break;
+  }
+  PID = index;
   MENU = MAIN_MENU;
 }
 
@@ -164,4 +215,6 @@ void mainMenu()
 {
   clear();
   print("MAIN MENU");
+  int i;
+  cin >> i;
 }
