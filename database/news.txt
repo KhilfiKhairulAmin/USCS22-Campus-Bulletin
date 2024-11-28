@@ -4,4 +4,6 @@ id^publisherId^createdAt^editedAt^publishedAt^title^content^numOfLikes^numOfDisl
 12^2^27/11/2024/22/22/14^27/11/2024/22/22/14^0/0/0/0/0/0^KTJ Family Day^Congrats on finishing your exam! Let's release our$tension at Cherating. Don't forget to bring your$swimsuits and goggles XD$^3^0^0
 13^2^28/11/2024/0/20/25^28/11/2024/0/20/25^0/0/0/0/0/0^USCS22 EXHIBITION^Meet aspiring developers from AD30 batch! Explore$the virtual world from our C++ project.$^1^0^0
 16^10^28/11/2024/10/42/18^28/11/2024/10/42/18^0/0/0/0/0/0^Anti-Rasuah^Tak baik rasuah ni. Kalau ada orang offer tu,$abstinen la!$^4^0^0
-17^10^28/11/2024/10/45/42^28/11/2024/10/45/42^0/0/0/0/0/0^Wordsmith Induction Day^Let's meet up with professional writers like Teme $at Level 3 Intec Library.$Date: 1/12/2024$Time: 10 am$Secure your seat by registering in the link.$https://www.googleforms.abcdefg.com$^0^1^0
+17^10^28/11/2024/10/45/42^28/11/2024/10/45/42^0/0/0/0/0/0^Wordsmith Induction Day^Let's meet up with professional writers like Teme $at Level 3 Intec Library.$Date: 1/12/2024$Time: 10 am$Secure your seat by registering in the link.$https://www.googleforms.abcdefg.com$^1^2^0
+18^11^28/11/2024/11/45/44^28/11/2024/11/45/44^0/0/0/0/0/0^Dance Practice with Boy Band "TXT"^Do grab this opportunity to meet up a famous boy $band from South Korea and have a dance practice $of few of their songs.$Attire: Sports Attire$SEE YOU SOON!!$^0^0^0
+19^14^28/11/2024/11/49/22^28/11/2024/11/49/22^0/0/0/0/0/0^Annual Cultural Night^Time: 8pm$Venue: INTEC Great Hall$Attire: Alam Melayu$SEE YOU SOON!$^2^0^0
