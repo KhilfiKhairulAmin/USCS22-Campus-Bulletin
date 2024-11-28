@@ -50,4 +50,15 @@ void calendar()
         cout << Yellow << "|\n";
         cout << Yellow <<"+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+\n";
     }
+
+    int x, y;
+  getMaxXY(x, y);
+  int length = y*20/100;
+    string space = string(length, ' ');
+
+    cout << endl << space << On_ICyan << "Press space to go back..." << Color_Off;
+  string i;
+  getline(cin, i);
+
+  clear();
 }
