@@ -233,13 +233,12 @@ void mainMenu() {
     slowPrint("MAIN MENU OPTIONS:", 40, BGreen);
     // print("*************************", Cyan);
     print("");
-    print("1. Create News");
-    print("2. Edit News");
+    print("1. Today's News");
+    print("5. Calendar");
+    print("2. Post News");
     print("3. Delete News");
-    print("4. Edit Profile");
-    print("5. View Calendar");
-    print("6. Read News");
-    print("7. Sign Out");
+    print("4. Manage Profile");
+    print("6. Sign Out");
 
     // TODO Create news, edit news, delete news, edit profile, view calendar, 
 
@@ -256,7 +255,8 @@ void mainMenu() {
     string line;
     switch (choice) {
       case 1:
-          createNews(); // Calls the Create News function
+        readNews();
+          
           break;
       case 2:
           editNews(); // Calls the Edit News function
@@ -265,16 +265,13 @@ void mainMenu() {
           deleteNews(); // Calls the Delete News function
           break;
       case 4:
-          getline(cin, line);
           editProfile(); // Calls the Edit Profile function
           break;
       case 5:
           calendar(); // Calls the Calendar function
-          getline(cin, line);
           break;
       case 6:
           readNews();
-          getline(cin, line);
           break;
       case 7:
           slowPrint("Goodbye!", 500);
@@ -309,7 +306,7 @@ void createNews()
     
     p += t + "\n";
   }
-  db->createNews(PID, title, p);
+  db->createNews(this_pub.id, title, p);
 }
 
 void deleteNews()
@@ -430,7 +427,7 @@ void deleteNews()
   while (true)
   {
     slowPrint("Enter News ID to delete (enter -1 to exit):", 40, UWhite);
-    id = inputNumber(5, 2);
+    id = inputNumber(5, 1);
 
     if (id <= 0)
       return;
@@ -571,7 +568,7 @@ void readNews()
   while (true)
   {
     slowPrint("Enter News ID to read (enter -1 to exit):", 40, UWhite);
-    id = inputNumber(5, 2);
+    id = inputNumber(5, 1);
 
     if (id <= 0)
       return;
@@ -640,7 +637,7 @@ void editProfile()
     {
       clear();
       thread th(clickButtonSound);
-      sidebar3(opts, selected);
+      sidebar5(opts, selected);
       th.join();
     }
 
@@ -652,7 +649,7 @@ void editProfile()
       key = _getch();  // Get the actual key code after 224/0
 
       if (key == 72)
-        selected = (selected + 2) % opts.size();
+        selected = (selected + opts.size() - 1) % opts.size();
       else if (key == 80)
         selected = (selected+1) % opts.size();
     }
@@ -663,7 +660,44 @@ void editProfile()
   }
   if (selected == 0)
   {
-    
+    print("ID:");
+    slowPrint(to_string(this_pub.id), 40, BIYellow);
+    print("");
+    print("NAME:");
+    slowPrint(this_pub.name, 40, BIYellow);
+    print("");
+    print("ABOUT:");
+    slowPrint(this_pub.about, 40, BIYellow);
+    print("");
+    print("PHONE:");
+    slowPrint(this_pub.phone, 40, BIYellow);
+    print("");
+    print("NEWS PUBLISHED:");
+    slowPrint(to_string(db->getTotalNewsPublished(this_pub.id)), 40, BIYellow);
+    print("");
+    print("POPULARITY RANKING:");
+    vector<array<int, 2>> rankings = db->getPopularityRankings();
+    int i = 1;
+    for (auto r = rankings.begin(); r < rankings.end(); r++)
+    {
+            if (r->at(0) == this_pub.id)
+      {
+        slowPrint("#" + to_string(r->at(0)) + " (Score: " + to_string(r->at(1)) + ")", 40, BIYellow);
+        break;
+      }
+      else
+        i++;
+    }
+    print("LIKES:");
+    slowPrint(to_string(db->getTotalLikes(this_pub.id)), 40, BIYellow);
+    print("");
+    print("DISLIKES:");
+    slowPrint(to_string(db->getTotalDislikes(this_pub.id)), 40, BIYellow);
+    print("");
+    print("\n");
+    print("Press [Enter] to continue");
+    string l;
+    getline(cin, l);
   }
   else if (selected == 1)
   {
