@@ -111,10 +111,10 @@ void entryMenu()
         slowPrint("SIGN UP", 40, UWhite);
         slowPrint("Register as a publisher");
       }
-      else if (selected == 3)
+      else if (selected == 2)
       {
-        MENU = GUESTS;
-        return;
+        slowPrint(" GUESTS ", 40, White);
+        print("Reaa");
       }
       print("\n");
       print("...");
@@ -127,15 +127,16 @@ void entryMenu()
     {
       key = _getch();  // Get the actual key code after 224/0
 
-      if (key == 72 || key == 80)
-      {
-        selected = (selected+1) % 2;
-
-        if (selected == 0)
-          MENU = SIGN_IN;
-        else
-          MENU = SIGN_UP;
-      }
+      if (key == 72)
+        selected = (selected+2) % 3;
+      else if (key == 80)
+        selected = (selected + 1) % 3;
+      if (selected == 0)
+        MENU = SIGN_IN;
+      else if (selected == 1)
+        MENU = SIGN_UP;
+      else if (selected == 2)
+        MENU = GUESTS;
     }
     else if (key == 13)
     {
