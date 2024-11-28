@@ -9,3 +9,5 @@ id^email^password^name^about^phone
 11^alya@gmail.com^tinte^Islamic Youth Organization^We post about Islamic sunnah, monthly events and daily hadith.^0113450001
 10^alya@gmail.com^tinte^ISC^Intc Student Counclu^0213213123
 11^adam@yahoo.com^12345678^KhilfiFC^Unta^0103186508
+12^khilfikhairulamin@gmail.com^khilfi^MyVolunteer^A volunteering club.^0111231234
+13^khilfikhairul@gmail.com^kk^kkk^kkk^11231232133

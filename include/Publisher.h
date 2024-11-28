@@ -72,7 +72,7 @@ class PublisherManager
     };
 
     /** Returns constant pointer vector storing all `Publishers`. */
-    const vector<Publisher>* getAllPublishers() const
+    vector<Publisher>* getAllPublishers() const
     {
       return publishers;
     }
