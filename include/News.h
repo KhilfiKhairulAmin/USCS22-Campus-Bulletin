@@ -60,6 +60,22 @@ class NewsManager
         false
       });
 
+      std::string url = "https://example.com/audio.mp3";
+
+      // Open a pipe to Python script
+      FILE* pythonProcess = popen("python3 ../voices.py", "w");
+      if (!pythonProcess) {
+          std::cerr << "Failed to start Python process." << std::endl;
+          return 1;
+      }
+
+      // Send URL to Python script
+      fprintf(pythonProcess, "%s\n", url.c_str());
+      fflush(pythonProcess);
+
+      // Close the pipe
+      pclose(pythonProcess);
+
       totalNews++;
       nextNewsId++;
       saveNews();
