@@ -234,16 +234,17 @@ void mainMenu() {
     // print("*************************", Cyan);
     print("");
     print("1. Today's News");
-    print("5. Calendar");
-    print("2. Post News");
-    print("3. Delete News");
-    print("4. Manage Profile");
-    print("6. Sign Out");
+    print("2. Event Calendar");
+    print("3. Post News");
+    print("4. Delete News");
+    print("5. Profile");
+    print("6. Logout");
+    print("7. Exit");
 
     // TODO Create news, edit news, delete news, edit profile, view calendar, 
 
     // Simulate sound effect for user input readiness
-    print("\a");
+    print("");
     slowPrint("Please select an option: ", 40, BIWhite);
 
     // Get the user's choice
@@ -255,27 +256,28 @@ void mainMenu() {
     string line;
     switch (choice) {
       case 1:
-        readNews();
-          
-          break;
-      case 2:
-          editNews(); // Calls the Edit News function
-          break;
-      case 3:
-          deleteNews(); // Calls the Delete News function
-          break;
-      case 4:
-          editProfile(); // Calls the Edit Profile function
-          break;
-      case 5:
-          calendar(); // Calls the Calendar function
-          break;
-      case 6:
           readNews();
           break;
+      case 2:
+          calendar(); // Calls the Edit News function
+          break;
+      case 3:
+          createNews(); // Calls the Delete News function
+          break;
+      case 4:
+          deleteNews(); // Calls the Edit Profile function
+          break;
+      case 5:
+          editProfile(); // Calls the Calendar function
+          break;
+      case 6:
+          MENU = ENTRY;
+          return;
+          break;
       case 7:
+          clear();
           slowPrint("Goodbye!", 500);
-          MENU = ENTRY; // Reset to the entry menu
+          exit(0);
           return;       // Exit the menu loop
       default:
           break;
@@ -660,6 +662,7 @@ void editProfile()
   }
   if (selected == 0)
   {
+    setPercentage(0, 10);
     print("ID:");
     slowPrint(to_string(this_pub.id), 40, BIYellow);
     print("");

@@ -211,6 +211,8 @@ string inputText(int maxSize, int minSize = 1, string def = "", string col = On_
       // Handle other keys (add to input)
       s += char(key);
     }
+        else
+      cout << '\a';
   }
   center(s.length());
   ROW--;
@@ -298,6 +300,8 @@ string inputEmail(int maxSize, int minSize = 1, string def = "", string col = On
       // Handle other keys (add to input)
       s += char(key);
     }
+        else
+      cout << '\a';
   }
   center(s.length());
   ROW--;
@@ -340,6 +344,8 @@ string inputPhone(int maxSize, int minSize = 1, string def = "", string col = On
       // Handle other keys (add to input)
       s += char(key);
     }
+        else
+      cout << '\a';
   }
   center(s.length());
   ROW--;
@@ -382,6 +388,8 @@ int inputNumber(int maxSize, int minSize = 1, string def = "", string col = On_I
       // Handle other keys (add to input)
       s += char(key);
     }
+    else
+      cout << '\a';
   }
   center(s.length());
   ROW--;
@@ -423,6 +431,8 @@ string inputPassword(int maxSize, int minSize = 1, string def = "")
       // Handle other keys (add to input)
       s += char(key);
     }
+        else
+      cout << '\a';
   }
   center(s.length());
   ROW--;
