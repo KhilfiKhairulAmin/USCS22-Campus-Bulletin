@@ -233,13 +233,13 @@ void mainMenu() {
     slowPrint("MAIN MENU OPTIONS:", 40, BGreen);
     // print("*************************", Cyan);
     print("");
-    print("1. Today's News");
+    print("1. Today's News  ");
     print("2. Event Calendar");
-    print("3. Post News");
-    print("4. Delete News");
-    print("5. Profile");
-    print("6. Logout");
-    print("7. Exit");
+    print("3. Post News     ");
+    print("4. Delete News   ");
+    print("5. Profile       ");
+    print("6. Logout        ");
+    print("7. Exit          ");
 
     // TODO Create news, edit news, delete news, edit profile, view calendar, 
 
