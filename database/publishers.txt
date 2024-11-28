@@ -12,5 +12,11 @@ id^email^password^name^about^phone
 12^khilfikhairulamin@gmail.com^khilfi^MyVolunteer^A volunteering club.^0111231234
 13^khilfikhairul@gmail.com^kk^kkk^kkk^11231232133
 14^gemabuana@gmail.com^gemabuana^GEMA BUANA^We are very cutesy, demure and love dancing.^0128996767
+<<<<<<< HEAD
 15^maryamasyaharim@gmail.com^123456^sace47^australian matrix^0124542254
 16^puteripna@gmail.com^1234^sya^sphagetti aglio olio^0123456789
+=======
+15^dayan18@gmail.com^dsZohari1124^mikhail club^mikhail^0123456789
+16^realemail@email.com^potato^Cat Lovers^Loving cats^0104206969
+17^pudin@gmail.com^hiii^OLD MONEY CLUB^TRX^0123456789
+>>>>>>> 202b0a013f1e2ba8af88aa1905cd8fd93b9153cf

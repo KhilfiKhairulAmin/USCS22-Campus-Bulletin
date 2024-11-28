@@ -110,7 +110,7 @@ void sidebar(vector<string> options, int selected)
   cout << "+" << string(length, '-') << "+\n";
   cout << "|" << space << "|\n";
   cout << "|    Welcome to" << string(length-14, ' ') << "|\n";
-  cout << BYellow << "|    INTEC HUB" << string(length-13, ' ') << Color_Off << "|\n";
+  cout << BYellow << "|    INTEC INSIDER" << string(length-13, ' ') << Color_Off << "|\n";
   cout << "|" << space << "|\n";
   cout << "+" << string(length, '-') << "+\n";
   for (int j = 0; j < interval - 1; j++)
