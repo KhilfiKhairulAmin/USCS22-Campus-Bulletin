@@ -26,6 +26,7 @@
 #define DELETE_NEWS 6   // MENU NUMBER 6
 #define EDIT_PROFILE 7  // MENU NUMBER 7
 #define CALENDAR 8      // MENU NUMBER 8
+#define GUESTS 9
 
 using namespace std;
 
@@ -74,6 +75,8 @@ int main()
       signIn();
     else if (MENU == MAIN_MENU)
       mainMenu();
+    else if (MENU == GUESTS)
+      readNews();
   }
 }
 
@@ -103,10 +106,15 @@ void entryMenu()
         cout << endl;
         slowPrint("Sign in to your account", 40);
       }
-      else
+      else if (selected == 1)
       {
         slowPrint("SIGN UP", 40, UWhite);
         slowPrint("Register as a publisher");
+      }
+      else if (selected == 3)
+      {
+        MENU = GUESTS;
+        return;
       }
       print("\n");
       print("...");
