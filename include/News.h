@@ -37,7 +37,7 @@ class NewsManager
 
   public:
     /** Returns a constant vector containing all `News`. */
-    const vector<News>* getAllNews() const
+    vector<News>* getAllNews() const
     {
       return news;
     }
@@ -64,6 +64,20 @@ class NewsManager
       nextNewsId++;
       saveNews();
       return totalNews-1;
+    }
+
+    void like(int id)
+    {
+      int index = searchNewsId(id);
+      news->at(index).numOfLikes += 1;
+      saveNews();
+    }
+
+    void dislike(int id)
+    {
+      int index = searchNewsId(id);
+      news->at(index).numOfDislikes += 1;
+      saveNews();
     }
 
     /** Modifies data inside a `News` with specified `id`. */
@@ -152,6 +166,9 @@ class NewsManager
           if (it->content[i] == '\n')
             it->content[i] = '$';
         outNews << it->id << "^" << it->publisherId << "^" << Datetime::datetimeToS(it->createdAt) << "^" << Datetime::datetimeToS(it->editedAt) << "^" << Datetime::datetimeToS(it->publishedAt) << "^" << it->title << "^" << it->content << "^" << it->numOfLikes << "^" << it->numOfDislikes << "^" << it->isPublished << "\n";
+        for (int i = 0; i < it->content.size(); i++)
+          if (it->content[i] == '$')
+            it->content[i] = '\n';
       }
     }
 
