@@ -1,4 +1,5 @@
 # `INTEC Insider Hub` (USCS22 Finals)
+![App Preview](https://github.com/KhilfiKhairulAmin/USCS22-INTEC-Insider/blob/main/preview.png?raw=true)
 ## Project Information
 ### 🤔 About
 `INTEC Insider Hub` is a **centralized newsplace app** featuring news broadcasting of events all-around the INTEC campus! This project aims to solve the **community problem:** the events and news around INTEC are scattered in multiple different groups, thus making it hard to keep informed of activities and announcements. This app solves the problem by gathering all clubs and organizations into **one place** where they can share the latest happenings to the students so that they are aware of occurences around the campus.
