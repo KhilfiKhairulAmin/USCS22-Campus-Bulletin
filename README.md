@@ -23,9 +23,10 @@ Click the link [here](https://github.com/KhilfiKhairulAmin/USCS22-INTEC-Insider/
 2. If you don't have VS Code, download using the link [here](https://code.visualstudio.com/).
 3. If you don't have Git Bash, download using the link [here](https://git-scm.com/downloads/win).
 4. Once VS Code and Git Bash is setup, open VS Code.
-5. In the terminal section of VS Code, open a new terminal by pressing the `+` button and selecting `Git Bash`.
-6. Copy and paste this command `cd "path/to/USCS22-INTEC-Insider"` into the terminal. Replace the `path/to/` with the path to this project folder.
-7. Paste the command `./run.sh` into the terminal to run the app.
+5. On the top left of VS Code, select `Terminal` and click `New Terminal`.
+6. In the terminal section, press the `˅` button (located beside the `+` button) and select `Git Bash`.
+7. Copy and paste this command `cd "path/to/USCS22-INTEC-Insider"` into the terminal. Replace the `path/to/` with the path to this project folder.
+8. Paste the command `./run.sh` into the terminal to run the app.
 
 ## Troubleshooting
 Please contact Khilfi's number in case the app doesn't run and have errors.
