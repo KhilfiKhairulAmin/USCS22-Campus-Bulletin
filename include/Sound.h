@@ -1,6 +1,6 @@
 #ifndef SOUND_H
 #define SOUND_H
-#include <SFML/Audio.hpp>
+#include "sfml/Audio.hpp"
 #include <iostream>
 using namespace std;
 
