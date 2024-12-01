@@ -1,6 +1,23 @@
-<<<<<<< HEAD
-id█pubid█title█content
-=======
-id█publisherId█datetime█title█content█tags█numOfLikes█numOfDislikes
-1█1█23904324█MyVo Clean the Beach█Beach got cleaned.█environment,volunteer█10█1
->>>>>>> project_revolution
+id^publisherId^createdAt^editedAt^publishedAt^title^content^numOfLikes^numOfDislikes^isPublished
+12^2^27/11/2024/22/22/14^27/11/2024/22/22/14^0/0/0/0/0/0^KTJ Family Day^Congrats on finishing your exam! Let's release our$tension at Cherating. Don't forget to bring your$swimsuits and goggles XD$^4^0^0
+13^2^28/11/2024/0/20/25^28/11/2024/0/20/25^0/0/0/0/0/0^USCS22 EXHIBITION^Meet aspiring developers from AD30 batch! Explore$the virtual world from our C++ project.$^1^0^0
+16^10^28/11/2024/10/42/18^28/11/2024/10/42/18^0/0/0/0/0/0^Anti-Rasuah^Tak baik rasuah ni. Kalau ada orang offer tu,$abstinen la!$^4^0^0
+17^10^28/11/2024/10/45/42^28/11/2024/10/45/42^0/0/0/0/0/0^Wordsmith Induction Day^Let's meet up with professional writers like Teme $at Level 3 Intec Library.$Date: 1/12/2024$Time: 10 am$Secure your seat by registering in the link.$https://www.googleforms.abcdefg.com$^2^2^0
+18^11^28/11/2024/11/45/44^28/11/2024/11/45/44^0/0/0/0/0/0^Dance Practice with Boy Band "TXT"^Do grab this opportunity to meet up a famous boy $band from South Korea and have a dance practice $of few of their songs.$Attire: Sports Attire$SEE YOU SOON!!$^2^0^0
+19^14^28/11/2024/11/49/22^28/11/2024/11/49/22^0/0/0/0/0/0^Annual Cultural Night^Time: 8pm$Venue: INTEC Great Hall$Attire: Alam Melayu$SEE YOU SOON!$^4^1^0
+20^15^28/11/2024/12/57/5^28/11/2024/12/57/5^0/0/0/0/0/0^sem holiday for sace^friday is the last day yayyy$$^1^0^0
+21^1^28/11/2024/13/12/54^28/11/2024/13/12/54^0/0/0/0/0/0^zahin^zahin was here thank you$$^0^1^0
+22^1^28/11/2024/13/15/18^28/11/2024/13/15/18^0/0/0/0/0/0^zahin 2.0^\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n$^1^0^0
+23^16^28/11/2024/13/46/58^28/11/2024/13/46/58^0/0/0/0/0/0^jfmnhgmghbg^,vjg,hjmgjf$^0^0^0
+24^16^28/11/2024/14/0/10^28/11/2024/14/0/10^0/0/0/0/0/0^wedding of mur and rusyi^dijemput semua warga intec untuk hadir ke hari $bahagia pasangan mempelai$murfiqah dan rusydina$selamat pengantin baru!$venue: dewan 3s$time: hari hari$disclaimer: grooms' name are confidential$come and attend to know who are they XD$^1^0^0
+10^1^27/11/2024/21/15/39^27/11/2024/21/15/39^0/0/0/0/0/0^ADTP Hajat Prayer^Let's be with us, guiding everyone into the right$path and make connection among ADTP students.$It is an annual event.$Go grab your chance!!$^2^1^0
+11^1^27/11/2024/21/2/2^27/11/2024/21/2/2^0/0/0/0/0/0^Kes Jenazah Terbang^Satu Hari saya nampak ade jenazah terbang atas^4^1^0
+12^2^27/11/2024/22/22/14^27/11/2024/22/22/14^0/0/0/0/0/0^KTJ Family Day^Congrats on finishing your exam! Let's release our$tension at Cherating. Don't forget to bring your$swimsuits and goggles XD$^3^0^0
+13^2^28/11/2024/0/20/25^28/11/2024/0/20/25^0/0/0/0/0/0^USCS22 EXHIBITION^Meet aspiring developers from AD30 batch! Explore$the virtual world from our C++ project.$^2^0^0
+16^10^28/11/2024/10/42/18^28/11/2024/10/42/18^0/0/0/0/0/0^Anti-Rasuah^Tak baik rasuah ni. Kalau ada orang offer tu,$abstinen la!$^5^0^0
+17^10^28/11/2024/10/45/42^28/11/2024/10/45/42^0/0/0/0/0/0^Wordsmith Induction Day^Let's meet up with professional writers like Teme $at Level 3 Intec Library.$Date: 1/12/2024$Time: 10 am$Secure your seat by registering in the link.$https://www.googleforms.abcdefg.com$^1^2^0
+18^11^28/11/2024/11/45/44^28/11/2024/11/45/44^0/0/0/0/0/0^Dance Practice with Boy Band "TXT"^Do grab this opportunity to meet up a famous boy $band from South Korea and have a dance practice $of few of their songs.$Attire: Sports Attire$SEE YOU SOON!!$^0^0^0
+19^14^28/11/2024/11/49/22^28/11/2024/11/49/22^0/0/0/0/0/0^Annual Cultural Night^Time: 8pm$Venue: INTEC Great Hall$Attire: Alam Melayu$SEE YOU SOON!$^2^0^0
+20^15^28/11/2024/12/11/0^28/11/2024/12/11/0^0/0/0/0/0/0^jasper^intellegent$^3^0^0
+21^10^28/11/2024/12/35/13^28/11/2024/12/35/13^0/0/0/0/0/0^P4U^Shah Alam - 14:00$5 of Maine students will be taking USPH32 quiz $.$^1^0^0
+22^17^28/11/2024/12/48/0^28/11/2024/12/48/0^0/0/0/0/0/0^OLD MONEY CLUB RECRUITMENT^Siapa join dapat jumpa Andika Putera. pastu.. da$dapat beli TRX.$^1^0^0
