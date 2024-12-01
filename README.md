@@ -16,7 +16,7 @@
 - `Terminal:` **Git Bash** (Powershell and CMD are **not** supported!)
  
 ### Download
-Click the link [here]() to download the app.
+Click the link [here](https://github.com/KhilfiKhairulAmin/USCS22-INTEC-Insider/releases/download/v1.0.0/USCS22-INTEC-Insider.zip) to download the app.
  
 ## ᯓ🏃🏻‍♀️‍➡️ How to Run
 1. Ensure all **System Requirements** have been met.
