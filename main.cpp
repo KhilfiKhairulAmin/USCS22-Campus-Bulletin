@@ -448,7 +448,7 @@ void deleteNews()
     {
       index = db->searchNewsId(id);
 
-      if (news->at(index).publisherId != news->at(PID).publisherId)
+      if (news->at(index).publisherId != this_pub.id)
         throw "News doesn't belong to you.";
       break;
     }
