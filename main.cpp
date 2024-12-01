@@ -1,11 +1,34 @@
-/*------------------------------------------------[ CREDITS ]-----------------------------------------------------------------*/
+/*----------------------------------------------[ INTRODUCTION ]---------------------------------------------------------------*/
 
-// TODO Siapkan different parts of UI and flow
-// TODO Dominate all the other groups by introducing some absurd feature (sound effects, image, data analytics)
-// TODO configuration, calendar view, link opener, text-to-speech, system information
-// TODO 
+/*
+WELCOME TO INTEC INSIDER HUB!
 
-/*-------------------------------------------[ HEADERS & INCLUDES ]------------------------------------------------------------*/
+We (Khilfi, Irfan, Alya & Rusydina) proudly present our project source code to you.
+
+This project is structured into one C++ file and several header files.
+`main.cpp` - The main source code of the project
+`include/[file].h` - Header files used by `main.cpp`
+
+In addition to that, this project also utilizes SFML, a popular C++ media library to play sound in the application.
+SFML library is stored in the `sfml` folder.
+
+All in all, the source code is separated into 4 main parts from top to bottom. The sections are listed below:
+1. INCLUDE, NAMESPACE & DEFINITION
+2. GLOBAL VARIABLES & FUNCTION PROTOTYPES
+3. MAIN FUNCTION
+4. FUNCTION DEFINITIONS
+
+Each function and global variable have been documented to provide clarification of their purpose.
+
+Lastly, we hope this source code serve as a prime example of what a structured and readable code should be. Please
+contact us if you have further inquiries or bug reports on this project.
+
+Thanks ^_^
+
+Github: https://github.com/KhilfiKhairulAmin/USCS22-INTEC-Insider
+*/
+
+/*-------------------------------------[ 1. INCLUDE, NAMESPACE & DEFINITION ]------------------------------------------------------*/
 
 
 #include "include/Database.h"       // For connecting to the database of the application
@@ -31,7 +54,7 @@
 using namespace std;
 
 
-/*--------------------------------[ GLOBAL VARIABLES & FUNCTION PROTOTYPES ]---------------------------------------------------*/
+/*--------------------------------[ 2. GLOBAL VARIABLES & FUNCTION PROTOTYPES ]---------------------------------------------------*/
 
 
 Database* db;
@@ -55,7 +78,7 @@ void entryMenu(),     // Function prototypes for all menus
      guests();
 
 
-/*---------------------------------------------[ MAIN PROGRAM ]----------------------------------------------------------------*/
+/*---------------------------------------------[ 3. MAIN FUNCTION ]----------------------------------------------------------------*/
 
 
 int main()
@@ -82,7 +105,7 @@ int main()
 }
 
 
-/*----------------------------------------[ FUNCTION DEFINITIONS ]-------------------------------------------------------------*/
+/*----------------------------------------[ 4. FUNCTION DEFINITIONS ]-------------------------------------------------------------*/
 
 
 void entryMenu()
@@ -250,9 +273,7 @@ void mainMenu() {
     print("5. Profile       ");
     print("6. Logout        ");
     print("7. Exit          ");
-
-    // TODO Create news, edit news, delete news, edit profile, view calendar, 
-
+    
     // Simulate sound effect for user input readiness
     print("");
     slowPrint("Please select an option: ", 40, BIWhite);

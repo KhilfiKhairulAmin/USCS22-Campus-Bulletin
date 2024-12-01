@@ -157,7 +157,6 @@ int getRow()
   return ROW;
 }
 
-// TODO: Input error handling
 // Input auto centralized + limit
 // Add sounds to all button press
 // Add more menu in main menu
